@@ -13,7 +13,7 @@ class Transaction < ApplicationRecord
       "Void"=> 2
   }
 
-  validates :created_by, :date, presence: true
+  validates :date, presence: true
   validates :transaction_type, inclusion: transaction_types.keys
 
   scheduledDelta = -1

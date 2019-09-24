@@ -1,4 +1,4 @@
-<%= form_with(model: transaction, local: true) do |form| %>
+<%= form_with(model: transaction, url: transactions_path(employee_id: @employee), local: true) do |form| %>
   <% if transaction.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
@@ -17,8 +17,13 @@
   </div>
 
   <div class="field">
-    <%= form.label :created_at %>
-    <%= form.date_select :created_at %>
+    <label>Created At:</label>
+    <input type="text" disabled="true" placeholder= <%= Date.today %> />
+  </div>
+
+  <div class="field">
+    <label>Employee Name:</label>
+    <input type="text" disabled="true" placeholder=<%= @employee.first_name %> />
   </div>
 
   <div class="field">

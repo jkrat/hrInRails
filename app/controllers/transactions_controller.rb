@@ -1,5 +1,6 @@
 class TransactionsController < ApplicationController
   before_action :set_transaction, only: [:show, :edit, :update, :destroy]
+  before_action :set_employee, only: [:new, :create]
 
   # GET /transactions
   def index
@@ -12,11 +13,8 @@ class TransactionsController < ApplicationController
 
   # GET /transactions/new
   def new
-    @employee = Employee.find(params[:employee_id])
     @transaction = Transaction.new(
-      created_by: @employee.first_name,
-      employee_id: @employee.id,
-      created_at: Date.today
+      created_by: 'Admin name'
     )
   end
 
@@ -27,9 +25,12 @@ class TransactionsController < ApplicationController
   # POST /transactions
   def create
     @transaction = Transaction.new(transaction_params)
-    @transaction.employee_id = 1
+    @transaction.employee_id = @employee.id
     @transaction.coin_balance = 0
     @transaction.delta = 0
+
+    Employee.
+
 
     respond_to do |format|
       if @transaction.save
@@ -68,6 +69,10 @@ class TransactionsController < ApplicationController
 
   def set_transaction
     @transaction = Transaction.find(params[:id])
+  end
+
+  def set_employee
+    @employee = Employee.find(params[:employee_id])
   end
 
   def transaction_params
