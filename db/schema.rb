@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_24_164545) do
+ActiveRecord::Schema.define(version: 2019_09_24_174451) do
 
   create_table "employees", force: :cascade do |t|
     t.string "first_name", null: false
@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2019_09_24_164545) do
     t.string "email", null: false
     t.integer "balance", default: 0
     t.date "start_date", null: false
-    t.integer "location", null: false
+    t.string "location", null: false
     t.integer "department", null: false
     t.string "region", null: false
     t.integer "status", default: 0

@@ -18,13 +18,12 @@ class Employee < ApplicationRecord
   }
 
   validates :first_name, :last_name, :email, :start_date, :location, :department, :region, :status, presence: true
-  validates :location, inclusion: locations.keys
   validates :department, inclusion: departments.keys
   validates :status, inclusion: statuses.keys
   validates :balance, numericality: { greater_than_or_equal_to: 0 }
 
-  def email(new_email)
-    self[:email] = new_email.strip.downcase
-  end
+  # def email(new_email)
+  #   self[:email] = new_email.strip.downcase
+  # end
 
 end
