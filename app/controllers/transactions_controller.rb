@@ -2,19 +2,22 @@ class TransactionsController < ApplicationController
   before_action :set_transaction, only: [:show, :edit, :update, :destroy]
 
   # GET /transactions
-  # GET /transactions.json
   def index
     @transactions = Transaction.all
   end
 
   # GET /transactions/1
-  # GET /transactions/1.json
   def show
   end
 
   # GET /transactions/new
   def new
-    @transaction = Transaction.new
+    @employee = Employee.find(params[:employee_id])
+    @transaction = Transaction.new(
+      created_by: @employee.first_name,
+      employee_id: @employee.id,
+      created_at: Date.today
+    )
   end
 
   # GET /transactions/1/edit
@@ -22,9 +25,11 @@ class TransactionsController < ApplicationController
   end
 
   # POST /transactions
-  # POST /transactions.json
   def create
     @transaction = Transaction.new(transaction_params)
+    @transaction.employee_id = 1
+    @transaction.coin_balance = 0
+    @transaction.delta = 0
 
     respond_to do |format|
       if @transaction.save
@@ -38,7 +43,6 @@ class TransactionsController < ApplicationController
   end
 
   # PATCH/PUT /transactions/1
-  # PATCH/PUT /transactions/1.json
   def update
     respond_to do |format|
       if @transaction.update(transaction_params)
@@ -52,7 +56,6 @@ class TransactionsController < ApplicationController
   end
 
   # DELETE /transactions/1
-  # DELETE /transactions/1.json
   def destroy
     @transaction.destroy
     respond_to do |format|
@@ -62,13 +65,12 @@ class TransactionsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_transaction
-      @transaction = Transaction.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def transaction_params
-      params.require(:transaction).permit(:created_by, :date, :type, :description, :coin_balance, :delta, :status)
-    end
+  def set_transaction
+    @transaction = Transaction.find(params[:id])
+  end
+
+  def transaction_params
+    params.require(:transaction).permit(:created_by, :date, :transaction_type, :description, :employee_id)
+  end
 end

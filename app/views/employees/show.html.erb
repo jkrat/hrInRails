@@ -1,13 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>First name:</strong>
-  <%= @employee.first_name %>
-</p>
-
-<p>
-  <strong>Last name:</strong>
-  <%= @employee.last_name %>
+  <strong>Name:</strong>
+  <%= @employee.first_name %> <%= @employee.last_name %>
 </p>
 
 <p>
@@ -16,8 +11,19 @@
 </p>
 
 <p>
-  <strong>Balance:</strong>
-  <%= @employee.balance %>
+  <strong>Region:</strong>
+  <%= @employee.region %>
+</p>
+
+
+<p>
+  <strong>Location:</strong>
+  <%= @employee.location %>
+</p>
+
+<p>
+  <strong>Department:</strong>
+  <%= @employee.department %>
 </p>
 
 <p>
@@ -26,9 +32,16 @@
 </p>
 
 <p>
-  <strong>Region:</strong>
-  <%= @employee.region %>
+  <strong>Status:</strong>
+  <%= @employee.status %>
+</p>
+
+<p>
+  <strong>Balance:</strong>
+  <%= @employee.balance %>
 </p>
 
 <%= link_to 'Edit', edit_employee_path(@employee) %> |
+<%= link_to 'Destroy', @employee, method: :delete, data: { confirm: 'Are you sure?' } %> |
+<%= link_to 'Create Transaction', new_transaction_path(employee_id: @employee) %> |
 <%= link_to 'Back', employees_path %>

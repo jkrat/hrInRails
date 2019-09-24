@@ -17,34 +17,25 @@
   </div>
 
   <div class="field">
+    <%= form.label :created_at %>
+    <%= form.date_select :created_at %>
+  </div>
+
+  <div class="field">
     <%= form.label :date %>
     <%= form.date_select :date %>
   </div>
 
   <div class="field">
-    <%= form.label :type %>
-    <%= form.number_field :type %>
+    <%= form.label :transaction_type %>
+    <%= form.select :transaction_type, Transaction.transaction_types.keys %>
   </div>
 
   <div class="field">
     <%= form.label :description %>
-    <%= form.text_field :description %>
+    <%= form.text_area :description , rows: 10, cols: 60 %>
   </div>
 
-  <div class="field">
-    <%= form.label :coin_balance %>
-    <%= form.number_field :coin_balance %>
-  </div>
-
-  <div class="field">
-    <%= form.label :delta %>
-    <%= form.number_field :delta %>
-  </div>
-
-  <div class="field">
-    <%= form.label :status %>
-    <%= form.number_field :status %>
-  </div>
 
   <div class="actions">
     <%= form.submit %>

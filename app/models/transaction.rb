@@ -1,6 +1,6 @@
 class Transaction < ApplicationRecord
   belongs_to :employee
-  enum type: {
+  enum transaction_type: {
       "Scheduled" => 0,
       "Unscheduled" => 1,
       "Unpaid" => 2,
@@ -13,9 +13,8 @@ class Transaction < ApplicationRecord
       "Void"=> 2
   }
 
-  validates :created_by, :date, :type, :description, :coin_balance, :delta, :status, presence: true
-  validates :type, inclusion: types.keys
-  validates :status, inclusion: statuses.keys
+  validates :created_by, :date, presence: true
+  validates :transaction_type, inclusion: transaction_types.keys
 
   scheduledDelta = -1
   unscheduledDelta = -2
