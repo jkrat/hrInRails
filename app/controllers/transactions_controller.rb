@@ -29,11 +29,11 @@ class TransactionsController < ApplicationController
     @transaction.coin_balance = 0
     @transaction.delta = 0
 
-    Employee.
+    employee_update = @employee.add_transaction @transaction
 
 
     respond_to do |format|
-      if @transaction.save
+      if @transaction.save && employee_update
         format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
         format.json { render :show, status: :created, location: @transaction }
       else

@@ -26,13 +26,14 @@ class Employee < ApplicationRecord
   #   self[:email] = new_email.strip.downcase
   # end
   def add_transaction(transaction)
-    self[:calculate_balance]
-    # transactions << transaction
+    calculate_balance
+    transactions << transaction
+    save
   end
 
   def calculate_balance
     puts 'here'
-    self[:balance] += 1
+    self[:balance] -= 1
   end
 
 end
