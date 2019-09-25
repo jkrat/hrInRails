@@ -32,7 +32,7 @@ class Employee < ApplicationRecord
     transactions << transaction
   end
 
-  def calculate_balance(delta)
+  def calculate_balance(delta = 0)
     current = transactions.to_a.sum { |t| t.delta}
     self[:balance] = current + delta
     save!

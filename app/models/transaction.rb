@@ -1,16 +1,16 @@
 class Transaction < ApplicationRecord
   belongs_to :employee
   enum transaction_type: {
-      "Scheduled" => 0,
-      "Unscheduled" => 1,
-      "Unpaid" => 2,
-      "Credit" => 3,
-      "Adjustment" => 4
+    Scheduled: 0,
+    Unscheduled: 1,
+    Unpaid: 2,
+    Credit: 3,
+    Adjustment: 4
   }
   enum status: {
-      "Approved" => 0,
-      "Requested" => 1,
-      "Void"=> 2
+    Approved: 0,
+    Requested: 1,
+    Void: 2
   }
 
   validates :date, presence: true
@@ -41,9 +41,10 @@ class Transaction < ApplicationRecord
     end
   end
 
-  def check
-    puts 'hit'
-    true
+  def void_transaction
+    self[:status] = 2
+    self[:delta] = 0
+    save
   end
 
 end
