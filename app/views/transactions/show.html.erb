@@ -1,9 +1,3 @@
-<!--<p id="notice"><%#= notice %></p>-->
-
-<% flash.each do |key, value| %>
-  <p id="notice"><%= value %></p>
-<% end %>
-
 <p>
   <strong>Created by:</strong>
   <%= @transaction.created_by %>
@@ -42,3 +36,6 @@
 <%= link_to 'Void', void_transaction_path(@transaction) %> |
 <%= link_to 'Employees', employees_path %>
 <%= link_to 'Transactions', transactions_path %>
+
+
+

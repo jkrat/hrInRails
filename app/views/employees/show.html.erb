@@ -1,47 +1,84 @@
-<p id="notice"><%= notice %></p>
+<h2><%= @employee.first_name %> <%= @employee.last_name %></h2>
+<div class="card my-3">
+  <div class="card-header">
+    <h3>Details</h3>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-4">
+        <h6 class="mb-0">Region: </h6>
+        <h4>  <%= @employee.region %></h4>
+      </div>
+      <div class="col-md-4">
+        <h6 class="mb-0">Location: </h6>
+        <h4> <%= @employee.location %></h4>
+      </div>
+      <div class="col-md-4">
+        <h6 class="mb-0">Department: </h6>
+        <h4><%= @employee.department %></h4>
+      </div>
+    </div>
+    <hr />
+    <div class="row">
+      <div class="col-md-4">
+        <h6 class="mb-0">Start Date: </h6>
+        <h4> <%= @employee.start_date.strftime('%b %d, %Y') %></h4>
+      </div>
+        <div class="col-md-4">
+          <h6 class="mb-0">Status: </h6>
+          <h4>  <%= @employee.status %></h4>
+        </div>
+      <div class="col-md-3 border border-warning rounded pt-2 pl-4 shadow-sm bg-light">
+        <h4 class="mb-0">Chacoin Balance: </h4>
+        <h2 class="font-weight-bold"><%= @employee.balance %></h2>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="text-right">
+  <%= link_to 'Create Transaction', new_transaction_path(employee_id: @employee), class: "btn btn-primary" %>
+  <%= link_to 'Edit Employee Details', edit_employee_path(@employee), class: "btn btn-secondary" %>
+  <%= link_to 'Destroy', @employee, method: :delete, class: "btn btn-secondary" %>
+</div>
+<div class="card my-3">
+  <div class="card-header">
+    <h3>Transactions (<%= @employee.transactions.to_a.count %>)</h3>
+  </div>
+  <div class="card-body">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Date</th>
+        <th>Type</th>
+        <th>Change</th>
+        <th>Description</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @employee.transactions.to_a.each do |transaction| %>
+      <tr>
+        <td style="width: 20%"> <%= transaction.date.strftime('%a, %b %d, %Y') %></td>
+        <td><%= transaction.transaction_type %> </td>
+        <%# if transaction.delta > 0 %>
+<!--        <td>+<%#= transaction.delta %></td>-->
+<!--        else-->
+        <td><%= transaction.delta %></td>
+        <%# end %>
+        <td><%= transaction.description %></td>
+        <td>
+          <%= link_to 'View', transaction, class: "btn btn-sm btn-primary" %>
+        </td>
+      </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="text-right">
+  <%= link_to 'Create Transaction', new_transaction_path(employee_id: @employee), class: "btn btn-primary" %>
+  <%= link_to 'Edit Employee Details', edit_employee_path(@employee), class: "btn btn-secondary" %>
+  <%= link_to 'Destroy', @employee, method: :delete, class: "btn btn-secondary" %>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @employee.first_name %> <%= @employee.last_name %>
-</p>
 
-<p>
-  <strong>Email:</strong>
-  <%= @employee.email %>
-</p>
-
-<p>
-  <strong>Region:</strong>
-  <%= @employee.region %>
-</p>
-
-
-<p>
-  <strong>Location:</strong>
-  <%= @employee.location %>
-</p>
-
-<p>
-  <strong>Department:</strong>
-  <%= @employee.department %>
-</p>
-
-<p>
-  <strong>Start date:</strong>
-  <%= @employee.start_date %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= @employee.status %>
-</p>
-
-<p>
-  <strong>Balance:</strong>
-  <%= @employee.balance %>
-</p>
-
-<%= link_to 'Edit', edit_employee_path(@employee) %> |
-<%= link_to 'Destroy', @employee, method: :delete %> |
-<%= link_to 'Create Transaction', new_transaction_path(employee_id: @employee) %> |
-<%= link_to 'Back', employees_path %>

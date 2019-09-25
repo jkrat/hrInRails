@@ -1,39 +1,28 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Transactions</h1>
 
-<table>
+<table class="table table-striped">
   <thead>
-    <tr>
-      <th>Created by</th>
-      <th>Date</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Coin balance</th>
-      <th>Delta</th>
-      <th>Status</th>
-      <th colspan="3"></th>
-    </tr>
+  <tr>
+    <th>Name</th>
+    <th>Date</th>
+    <th>Type</th>
+    <th>Change</th>
+    <th>Description</th>
+    <th></th>
+  </tr>
   </thead>
-
   <tbody>
     <% @transactions.each do |transaction| %>
       <tr>
-        <td><%= transaction.created_by %></td>
+        <td><%= transaction.employee_id %></td>
         <td><%= transaction.date %></td>
         <td><%= transaction.transaction_type %></td>
-        <td><%= transaction.description %></td>
-        <td><%= transaction.coin_balance %></td>
         <td><%= transaction.delta %></td>
-        <td><%= transaction.status %></td>
-        <td><%= link_to 'Show', transaction %></td>
-        <td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>
-        <td><%= link_to 'Destroy', transaction, method: :delete %></td>
+        <td><%= transaction.description %></td>
+
+        <td><%= link_to 'View', transaction, class: "btn btn-sm btn-primary" %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'Employees', employees_path %>
