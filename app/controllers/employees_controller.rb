@@ -22,15 +22,19 @@ class EmployeesController < ApplicationController
   # POST /employees
   def create
     @employee = Employee.new(employee_params)
-
-    respond_to do |format|
-      if @employee.save
-        format.html { redirect_to @employee, notice: 'Employee was successfully created.' }
-        format.json { render :show, status: :created, location: @employee }
-      else
-        format.html { render :new }
-        format.json { render json: @employee.errors, status: :unprocessable_entity }
+    if @employee.save
+      @transaction = Transaction.create_initial_transaction(@employee.balance, @employee.id, 'admin')
+      begin
+        @employee.add_transaction @transaction
+        flash[:success] = 'Employee was successfully created.'
+        redirect_to @employee
+      rescue => e
+        flash[:error] = e.to_s
+        render :new
       end
+    else
+      flash[:success] = 'Employee could not be created.'
+      render :new
     end
   end
 

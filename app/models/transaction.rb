@@ -47,4 +47,16 @@ class Transaction < ApplicationRecord
     save
   end
 
+  def self.create_initial_transaction(delta, employee_id, creator)
+    @transaction = Transaction.new(
+        created_by: creator,
+        created_at: Date.today,
+        date: Date.today,
+        employee_id: employee_id,
+        transaction_type: Transaction.transaction_types['Adjustment'],
+        description: 'Initial Chacoin Balance',
+        status: 0,
+        delta: delta
+    )
+  end
 end
