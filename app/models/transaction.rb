@@ -16,12 +16,29 @@ class Transaction < ApplicationRecord
   validates :date, presence: true
   validates :transaction_type, inclusion: transaction_types.keys
 
-  scheduledDelta = -1
-  unscheduledDelta = -2
-  creditDelta = 1
-
-  def set_delta(adjustment_amount)
-    self[:delta] = 1
+  def delta=(adjustment_amount)
+    scheduled_delta = -1
+    unscheduled_delta = -2
+    credit_delta = 1
+    if status == Transaction.statuses['Void']
+      self[:delta] = 0
+    else
+      self[:delta] = case transaction_type
+                      when 'Scheduled'
+                      -1
+                        # scheduled_delta
+                      when 'Unscheduled'
+                        unscheduled_delta
+                      when 'Unpaid'
+                        0
+                      when 'Credit'
+                        credit_delta
+                      when 'Adjustment'
+                        adjustment_amount
+                      else
+                        0
+       end
+    end
   end
 
   def check

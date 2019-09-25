@@ -20,13 +20,14 @@ class TransactionsController < ApplicationController
 
   # GET /transactions/1/edit
   def edit
+    @employee = Employee.find(@transaction.employee_id)
   end
 
   # POST /transactions
   def create
     @transaction = Transaction.new(transaction_params)
     @transaction.employee_id = @employee.id
-    @transaction.delta = 1
+    @transaction.delta = 0
 
     begin
       @employee.add_transaction @transaction
