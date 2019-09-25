@@ -24,4 +24,9 @@ class Transaction < ApplicationRecord
     self[:delta] = 1
   end
 
+  def check
+    puts 'hit'
+    true
+  end
+
 end

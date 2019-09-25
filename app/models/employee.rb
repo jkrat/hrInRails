@@ -25,15 +25,17 @@ class Employee < ApplicationRecord
   # def email(new_email)
   #   self[:email] = new_email.strip.downcase
   # end
+  #
   def add_transaction(transaction)
-    calculate_balance
+    calculate_balance transaction.delta
+    transaction.coin_balance = balance
     transactions << transaction
-    save
   end
 
-  def calculate_balance
-    puts 'here'
-    self[:balance] -= 1
+  def calculate_balance(delta)
+    current = transactions.to_a.sum { |t| t.delta}
+    self[:balance] = current + delta
+    save!
   end
 
 end

@@ -26,20 +26,15 @@ class TransactionsController < ApplicationController
   def create
     @transaction = Transaction.new(transaction_params)
     @transaction.employee_id = @employee.id
-    @transaction.coin_balance = 0
-    @transaction.delta = 0
+    @transaction.delta = 1
 
-    employee_update = @employee.add_transaction @transaction
-
-
-    respond_to do |format|
-      if @transaction.save && employee_update
-        format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
-        format.json { render :show, status: :created, location: @transaction }
-      else
-        format.html { render :new }
-        format.json { render json: @transaction.errors, status: :unprocessable_entity }
-      end
+    begin
+      @employee.add_transaction @transaction
+      flash[:success] = 'Transaction was successfully created.'
+      redirect_to @transaction
+    rescue => e
+      flash[:error] = e.to_s
+      render :new
     end
   end
 
