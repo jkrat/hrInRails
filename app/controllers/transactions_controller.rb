@@ -32,7 +32,7 @@ class TransactionsController < ApplicationController
     begin
       @employee.add_transaction @transaction
       flash[:success] = 'Transaction was successfully created.'
-      redirect_to @transaction
+      redirect_to @employee
     rescue => e
       flash[:error] = e.to_s
       render :new

@@ -11,38 +11,49 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :created_by %>
-    <%= form.text_field :created_by %>
+  <div class="card">
+    <div class="card-header">
+      <h2>Create Transaction</h2>
+    </div>
+    <div class="card-body">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <%= form.label :created_by, class: "col-form-label" %>
+          <%= form.text_field :created_by, class: "form-control form-control-lg"%>
+        </div>
+        <div class="form-group col-md-6">
+          <label class="col-form-label">Created At:</label>
+          <input type="date" class="form-control form-control-lg" disabled="true" value= <%= @transaction.created_at || Date.today %> />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label class="col-form-label">Employee Name:</label>
+          <input type="text" class="form-control form-control-lg" disabled="true" value= <%= full_name %> />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <%= form.label :date, class: "col-form-label" %>
+          <%= form.date_select :date, class: "form-control form-control-lg"%>
+        </div>
+        <div class="form-group col-md-6">
+          <%= form.label :transaction_type, class: "col-form-label" %>
+          <%= form.select :transaction_type, Transaction.transaction_types.keys, class: "form-control form-control-lg" %>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-12">
+          <%= form.label :description, class: "col-form-label" %>
+          <%= form.text_area :description , rows: 5, class: "form-control form-control-lg" %>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="field">
-    <label>Created At:</label>
-    <input type="text" disabled="true" placeholder= <%= Date.today %> />
-  </div>
-
-  <div class="field">
-    <label>Employee Name:</label>
-    <input type="text" disabled="true" placeholder=<%= @employee.first_name %> />
-  </div>
-
-  <div class="field">
-    <%= form.label :date %>
-    <%= form.date_select :date %>
-  </div>
-
-  <div class="field">
-    <%= form.label :transaction_type %>
-    <%= form.select :transaction_type, Transaction.transaction_types.keys %>
-  </div>
-
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description , rows: 10, cols: 60 %>
-  </div>
-
-
-  <div class="actions">
-    <%= form.submit %>
+  <div class="text-right mt-3">
+    <div class="actions">
+      <%= link_to 'Cancel', :back, class: "btn btn-secondary" %>
+      <%= form.submit class: "btn btn-primary" %>
+    </div>
   </div>
 <% end %>

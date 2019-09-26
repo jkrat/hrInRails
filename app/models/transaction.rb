@@ -47,6 +47,10 @@ class Transaction < ApplicationRecord
     save
   end
 
+  def employee
+    Employee.find(employee_id)
+  end
+
   def self.create_initial_transaction(delta, employee_id, creator)
     @transaction = Transaction.new(
         created_by: creator,

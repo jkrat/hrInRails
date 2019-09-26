@@ -1,9 +1,4 @@
 <h1>New Transaction</h1>
 
-<% flash.each do |key, value| %>
-  <p id="notice"><%= value %></p>
-<% end %>
-
 <%= render 'form', transaction: @transaction %>
 
-<%= link_to 'Back', transactions_path %>

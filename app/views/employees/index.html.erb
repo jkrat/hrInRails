@@ -13,7 +13,7 @@
   <tbody>
     <% @employees.each do |employee| %>
       <tr class=<%= employee.status %> >
-        <td><%= link_to "#{employee.first_name} #{employee.last_name}", employee  %></td>
+      <td><%= link_to "#{employee.first_name} #{employee.last_name}", employee  %></td>
         <td><%= employee.region %></td>
         <td><%= employee.location %></td>
         <td><%= employee.department %></td>

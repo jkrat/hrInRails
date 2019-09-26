@@ -5,6 +5,9 @@
         <%= render "shared/transaction_sidebar" %>
       </div>
       <div class="col-sm-9" id="Admin-Content">
+        <% flash.each do |key, value| %>
+          <p id="notice"><%= value %></p>
+        <% end %>
         <%= content_for?(:transactions_content) ? yield(:transactions_content) : yield %>
       </div>
     </div>
