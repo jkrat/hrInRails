@@ -3,7 +3,12 @@ class EmployeesController < ApplicationController
 
   # GET /employees
   def index
-    @employees = Employee.all
+    puts
+    @employees = Employee.where(nil)
+    @employees = @employees.region(params[:region]) if params[:region].present?
+    @employees = @employees.location(params[:location]) if params[:location].present?
+    @employees = @employees.department(Employee.departments[params[:department]]) if params[:department].present?
+    @employees = @employees.last_name(params[:search]) if params[:search].present?
   end
 
   # GET /employees/1
