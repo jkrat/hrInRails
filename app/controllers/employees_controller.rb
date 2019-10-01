@@ -27,42 +27,30 @@ class EmployeesController < ApplicationController
   # POST /employees
   def create
     @employee = Employee.new(employee_params)
-    if @employee.save
-      @transaction = Transaction.create_initial_transaction(@employee.balance, @employee.id, 'admin')
-      begin
-        @employee.add_transaction @transaction
-        flash[:success] = 'Employee was successfully created.'
-        redirect_to @employee
-      rescue => e
-        flash[:error] = e.to_s
-        render :new
-      end
-    else
-      flash[:success] = 'Employee could not be created.'
+
+    if @employee.invalid?
       render :new
+    else
+      @employee.add_transaction Transaction.create_initial_transaction(@employee.balance, 'admin')
+      @employee.save
+      flash[:success] = 'Employee was successfully created.'
+      redirect_to @employee
     end
   end
 
   # PATCH/PUT /employees/1
   def update
-    respond_to do |format|
-      if @employee.update(employee_params)
-        format.html { redirect_to @employee, notice: 'Employee was successfully updated.' }
-        format.json { render :show, status: :ok, location: @employee }
-      else
-        format.html { render :edit }
-        format.json { render json: @employee.errors, status: :unprocessable_entity }
-      end
+    if @employee.update(employee_params)
+      redirect_to @employee, notice: 'Employee was successfully updated.'
+    else
+      render :edit
     end
   end
 
   # DELETE /employees/1
   def destroy
     @employee.destroy
-    respond_to do |format|
-      format.html { redirect_to employees_url, notice: 'Employee was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to employees_url, notice: 'Employee was successfully destroyed.'
   end
 
   private

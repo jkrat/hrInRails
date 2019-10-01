@@ -25,16 +25,14 @@ class TransactionsController < ApplicationController
 
   # POST /transactions
   def create
-    @transaction = Transaction.new(transaction_params)
-    @transaction.employee_id = @employee.id
-    @transaction.delta = 0
+    @employee.add_transaction(transaction_params)
 
-    begin
-      @employee.add_transaction @transaction
+    if @employee.save
       flash[:success] = 'Transaction was successfully created.'
       redirect_to @employee
-    rescue => e
-      flash[:error] = e.to_s
+    else
+      @transaction = Transaction.new(transaction_params)
+      flash[:error] = 'Transaction leaves employee with negative balance'
       render :new
     end
   end
@@ -42,15 +40,16 @@ class TransactionsController < ApplicationController
   # GET /transactions/1/void
   def void
     @employee = Employee.find(@transaction.employee_id)
+    original_delta = @transaction.void_transaction
+    @employee.calculate_balance
 
-    begin
-      @transaction.void_transaction
-      @employee.calculate_balance
+    if @employee.save
       flash[:success] = 'Transaction was successfully voided.'
-    rescue => e
-      flash[:error] = e.to_s
+    else
+      @transaction.un_void(original_delta)
+      flash[:error] = 'Voiding transaction would leave employee with negative balance'
     end
-    redirect_to @transaction
+    redirect_to @employee
   end
 
   # DELETE /transactions/1
@@ -73,6 +72,9 @@ class TransactionsController < ApplicationController
   end
 
   def transaction_params
-    params.require(:transaction).permit(:created_by, :date, :transaction_type, :description, :employee_id)
+    params
+        .require(:transaction)
+        .permit(:created_by, :date, :transaction_type, :description)
+        .merge(delta: 0)
   end
 end

@@ -17,7 +17,7 @@ class Employee < ApplicationRecord
       'Inactive' => 1
   }
 
-  validates :first_name, :last_name, :email, :start_date, :location, :department, :region, :status, presence: true
+  validates :first_name, :last_name, :email, :start_date, :location, :region, presence: true
   validates :department, inclusion: departments.keys
   validates :status, inclusion: statuses.keys
   validates :balance, numericality: { greater_than_or_equal_to: 0 }
@@ -28,20 +28,22 @@ class Employee < ApplicationRecord
   scope :department, -> (department) { where department: department }
   scope :last_name, -> (last_name) { where('last_name like ?', "#{last_name}%")}
 
-  # def email(new_email)
-  #   self[:email] = new_email.strip.downcase
-  # end
-  #
-  def add_transaction(transaction)
-    calculate_balance transaction.delta
-    transaction.coin_balance = balance
-    transactions << transaction
+  before_save :email_to_lowercase
+
+  def add_transaction(params)
+    @transaction = transactions.build(params)
+    calculate_balance
+    @transaction.coin_balance = balance
   end
 
-  def calculate_balance(delta = 0)
-    current = transactions.to_a.sum { |t| t.delta}
-    self[:balance] = current + delta
-    save!
+  def calculate_balance
+    self.balance = transactions.sum { |t| t.delta }
+  end
+
+  private
+
+  def email_to_lowercase
+    email.strip.downcase
   end
 
 end

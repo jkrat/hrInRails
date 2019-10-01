@@ -20,47 +20,45 @@ class Transaction < ApplicationRecord
     scheduled_delta = -1
     unscheduled_delta = -2
     credit_delta = 1
-    if status == Transaction.statuses['Void']
-      self[:delta] = 0
-    else
-      self[:delta] = case transaction_type
-                      when 'Scheduled'
-                      -1
-                        # scheduled_delta
-                      when 'Unscheduled'
-                        unscheduled_delta
-                      when 'Unpaid'
-                        0
-                      when 'Credit'
-                        credit_delta
-                      when 'Adjustment'
-                        adjustment_amount
-                      else
-                        0
-       end
+    self[:delta] = case transaction_type
+                   when 'Scheduled'
+                     scheduled_delta
+                   when 'Unscheduled'
+                     unscheduled_delta
+                   when 'Unpaid'
+                     0
+                   when 'Credit'
+                     credit_delta
+                   when 'Adjustment'
+                     adjustment_amount
+                   else
+                     0
     end
   end
 
   def void_transaction
+    original_delta = delta
     self[:status] = 2
     self[:delta] = 0
     save
+    original_delta
   end
 
-  def employee
-    Employee.find(employee_id)
+  def un_void(original_delta)
+    self[:status] = 0
+    self[:delta] = original_delta
+    save
   end
 
-  def self.create_initial_transaction(delta, employee_id, creator)
-    @transaction = Transaction.new(
-        created_by: creator,
-        created_at: Date.today,
-        date: Date.today,
-        employee_id: employee_id,
-        transaction_type: Transaction.transaction_types['Adjustment'],
-        description: 'Initial Chacoin Balance',
-        status: 0,
-        delta: delta
-    )
+  def self.create_initial_transaction(delta, creator)
+    transaction_params = {
+      created_by: creator,
+      created_at: Date.today,
+      date: Date.today,
+      transaction_type: Transaction.transaction_types['Adjustment'],
+      description: 'Initial Chacoin Balance',
+      status: Transaction.statuses['Approved'],
+      delta: delta
+    }
   end
 end
