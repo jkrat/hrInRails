@@ -13,7 +13,7 @@
   </thead>
   <tbody>
     <% @transactions.each do |transaction| %>
-      <tr>
+      <tr class=<%= transaction.status == 'Void'? transaction.status :  transaction.transaction_type %> >
         <td><%= link_to "#{transaction.employee.first_name} #{transaction.employee.last_name}", transaction.employee %></td>
         <td><%= transaction.date %></td>
         <td><%= transaction.transaction_type %></td>

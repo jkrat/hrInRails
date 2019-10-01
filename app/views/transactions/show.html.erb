@@ -30,10 +30,18 @@
         <h6 class="mb-0">Type: </h6>
         <h4> <%= @transaction.transaction_type %></h4>
       </div>
+      <% if @transaction.status == 'Void' %>
+        <div class="col-md-2 border border-danger rounded pt-2 pl-4 shadow-sm bg-light">
+          <h6 class="mb-0">Status: </h6>
+          <h4><%= @transaction.status %></h4>
+        </div>
+        <div class="col-md-2"></div>
+       <% else %>
       <div class="col-md-4">
         <h6 class="mb-0">Status: </h6>
         <h4>  <%= @transaction.status %></h4>
       </div>
+        <% end %>
       <div class="col-md-3">
         <h6 class="mb-0">Change: </h6>
         <% if @transaction.delta > 0 %>
