@@ -1,19 +1,1 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  created_by: MyString
-  date: 2019-09-24
-  type: 1
-  description: MyString
-  coin_balance: 1
-  delta: 1
-  status: 1
-
-two:
-  created_by: MyString
-  date: 2019-09-24
-  type: 1
-  description: MyString
-  coin_balance: 1
-  delta: 1
-  status: 1
