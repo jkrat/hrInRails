@@ -22,11 +22,11 @@ class Employee < ApplicationRecord
   validates :status, inclusion: statuses.keys
   validates :balance, numericality: { greater_than_or_equal_to: 0 }
 
-  scope :active, -> () { where('employees.status == ?', Employee.statuses['Active']) }
-  scope :region, -> (region) { where region: region }
-  scope :location, -> (location) { where location: location }
-  scope :department, -> (department) { where department: department }
-  scope :last_name, -> (last_name) { where('last_name like ?', "#{last_name}%")}
+  scope :active, ->() { where('employees.status == ?', Employee.statuses['Active']) }
+  scope :region, ->(region) { where region: region }
+  scope :location, ->(location) { where location: location }
+  scope :department, ->(department) { where department: department }
+  scope :last_name, ->(last_name) { where('last_name like ?', "#{last_name}%")}
 
   before_save :email_to_lowercase
 
@@ -37,7 +37,7 @@ class Employee < ApplicationRecord
   end
 
   def calculate_balance
-    self.balance = transactions.sum { |t| t.delta }
+    self.balance = transactions.sum(&:delta)
   end
 
   private

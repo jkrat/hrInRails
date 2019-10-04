@@ -1,0 +1,12 @@
+<% content_for :content do %>
+  <div class="col-sm-12" id="Admin-Content">
+    <% flash.each do |key, value| %>
+      <p id="notice"><%= value %></p>
+    <% end %>
+    <div class="py-3 px-5">
+      <%= yield %>
+    </div>
+  </div>
+<% end %>
+
+<%= render template: "layouts/application" %>

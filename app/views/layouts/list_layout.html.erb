@@ -2,17 +2,16 @@
   <div class="py-3 px-4">
     <div class="row" id="row">
       <div class="col-sm-3" id="Admin-Sidebar">
-        <%= render "shared/transaction_sidebar" %>
+        <%= render "shared/sidebar" %>
       </div>
       <div class="col-sm-9" id="Admin-Content">
         <% flash.each do |key, value| %>
           <p id="notice"><%= value %></p>
         <% end %>
-        <%= content_for?(:transactions_content) ? yield(:transactions_content) : yield %>
+        <%= yield  %>
       </div>
     </div>
   </div>
 <% end %>
-
 
 <%= render template: "layouts/application" %>

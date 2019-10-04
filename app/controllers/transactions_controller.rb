@@ -1,14 +1,21 @@
 class TransactionsController < ApplicationController
+  layout 'list_layout'
+
   before_action :set_transaction, only: [:show, :edit, :void, :destroy]
   before_action :set_employee, only: [:new, :create]
 
   # GET /transactions
   def index
-    @transactions = Transaction.all
+    @transactions = Transaction.where(nil)
+    @transactions = @transactions.includes(:employee).where(employees: { region: params[:region] }) if params[:region].present?
+    @transactions = @transactions.includes(:employee).where(employees: { location: params[:location] }) if params[:location].present?
+    @transactions = @transactions.includes(:employee).where(employees: { department: Employee.departments[params[:department]] }) if params[:department].present?
+    @transactions = @transactions.includes(:employee).where(employees: { last_name: params[:search] }) if params[:search].present?
   end
 
   # GET /transactions/1
   def show
+    render layout: 'main_layout'
   end
 
   # GET /transactions/new
@@ -73,8 +80,8 @@ class TransactionsController < ApplicationController
 
   def transaction_params
     params
-        .require(:transaction)
-        .permit(:created_by, :date, :transaction_type, :description)
-        .merge(delta: 0)
+      .require(:transaction)
+      .permit(:created_by, :date, :transaction_type, :description)
+      .merge(delta: 0)
   end
 end
