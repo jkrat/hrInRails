@@ -6,6 +6,16 @@ FactoryBot.define do
     date { Date.today }
     transaction_type { Transaction.transaction_types[:Scheduled] }
     delta { 0 }
+
+    factory :initial_transaction do
+      transaction_type { Transaction.transaction_types[:Adjustment] }
+      delta { 4 }
+    end
+
+    factory :transaction_negative_5 do
+      transaction_type { Transaction.transaction_types[:Adjustment] }
+      delta { -5 }
+    end
   end
 
   factory :employee do
@@ -16,6 +26,7 @@ FactoryBot.define do
     location { 'Northwest Hwy' }
     department { Employee.departments['Sales'] }
     region { 'Dallas - Ft. Worth' }
+    balance { 4 }
 
     factory :employee_with_transactions do
       last_name { ' Dirt '}

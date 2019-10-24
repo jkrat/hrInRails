@@ -11,6 +11,23 @@ class TransactionTest < ActiveSupport::TestCase
 
   test 'creates new transaction' do
     transaction1 = create(:transaction)
-    puts transaction1.inspect
   end
+
+  test 'blocks transaction that makes employee balance negative' do
+    @employee = create(:employee)
+    @transaction_initial = build(:initial_transaction)
+    @transaction = build(:transaction_negative_5)
+
+    @employee.transactions << @transaction_initial
+    
+    p @employee.balance
+
+    @employee.transactions << @transaction
+    @employee.calculate_balance
+
+    p @employee.balance
+
+    assert_equal -1, @employee.balance
+    end
+
 end
