@@ -18,7 +18,7 @@
         <td><%= transaction.date %></td>
         <td><%= transaction.transaction_type %></td>
         <td><%= transaction.delta %></td>
-        <td><%= transaction.description %></td>
+        <td><%= truncate(transaction.description, length: 28) %></td>
 
         <td><%= link_to 'View', transaction, class: "btn btn-sm btn-primary" %></td>
       </tr>

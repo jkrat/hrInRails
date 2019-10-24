@@ -73,7 +73,7 @@
           <% else %>
         <td><%= transaction.delta %></td>
         <% end %>
-        <td><%= transaction.description %></td>
+        <td><%= truncate(transaction.description, length: 34) %></td>
         <td>
           <%= link_to 'View', transaction, class: "btn btn-sm btn-primary" %>
         </td>
