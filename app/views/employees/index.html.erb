@@ -8,16 +8,18 @@
       <th>Location</th>
       <th>Department</th>
       <th>Balance</th>
+      <th>Time Card</th>
   </tr>
   </thead>
   <tbody>
     <% @employees.each do |employee| %>
       <tr class=<%= employee.status %> >
-      <td><%= link_to "#{employee.first_name} #{employee.last_name}", employee  %></td>
+      <td><%= link_to "#{employee.first_name} #{employee.last_name}", employee %></td>
         <td><%= employee.region %></td>
         <td><%= employee.location %></td>
         <td><%= employee.department %></td>
         <td><%= employee.balance %></td>
+
       </tr>
     <% end %>
   </tbody>

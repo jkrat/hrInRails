@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_01_164912) do
+ActiveRecord::Schema.define(version: 2019_10_28_192330) do
 
   create_table "employees", force: :cascade do |t|
     t.string "first_name", null: false
@@ -24,6 +24,23 @@ ActiveRecord::Schema.define(version: 2019_10_01_164912) do
     t.integer "status", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "time_cards", force: :cascade do |t|
+    t.integer "employee_id"
+    t.integer "pay_period", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["employee_id"], name: "index_time_cards_on_employee_id"
+  end
+
+  create_table "time_clock_events", force: :cascade do |t|
+    t.integer "time_card_id"
+    t.datetime "time", null: false
+    t.string "type", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["time_card_id"], name: "index_time_clock_events_on_time_card_id"
   end
 
   create_table "transactions", force: :cascade do |t|
@@ -40,5 +57,7 @@ ActiveRecord::Schema.define(version: 2019_10_01_164912) do
     t.index ["employee_id"], name: "index_transactions_on_employee_id"
   end
 
+  add_foreign_key "time_cards", "employees"
+  add_foreign_key "time_clock_events", "time_cards"
   add_foreign_key "transactions", "employees"
 end

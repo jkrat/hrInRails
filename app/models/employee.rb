@@ -1,5 +1,6 @@
 class Employee < ApplicationRecord
   has_many :transactions, dependent: :destroy
+  has_many :time_cards, dependent: :destroy
   enum department: {
       'Office' => 0,
       'Sales' => 1,
