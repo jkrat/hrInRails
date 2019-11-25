@@ -1,8 +1,6 @@
 class Employee < ApplicationRecord
-
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :trackable
-
+  belongs_to :user
+  belongs_to :organization
   has_many :transactions, dependent: :destroy
 
   enum department: {
