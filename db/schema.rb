@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_25_175514) do
+ActiveRecord::Schema.define(version: 2019_11_25_221532) do
 
   create_table "employees", force: :cascade do |t|
     t.string "first_name", null: false
@@ -21,11 +21,12 @@ ActiveRecord::Schema.define(version: 2019_11_25_175514) do
     t.string "location", null: false
     t.integer "department", null: false
     t.string "region", null: false
-    t.integer "status", default: 0
+    t.integer "status", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
     t.integer "organization_id"
+    t.integer "permission_level", default: 0
     t.index ["email"], name: "index_employees_on_email", unique: true
     t.index ["organization_id"], name: "index_employees_on_organization_id"
     t.index ["user_id"], name: "index_employees_on_user_id"

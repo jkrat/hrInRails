@@ -27,6 +27,16 @@
   </div>
 
   <div class="field">
+    <%= form.label :permission_level %>
+    <%= form.select :permission_level, Employee.permission_levels.keys %>
+  </div>
+
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.select :status, Employee.statuses.keys, prompt: 'Select Status' %>
+  </div>
+
+  <div class="field">
     <%= form.label :region %>
     <%= form.text_field :region %>
   </div>

@@ -1,10 +1,21 @@
 Rails.application.routes.draw do
+  devise_for :users, controllers: {
+      sessions: 'users/sessions'
+  }
+
+  root 'home#index', as: 'home_index'
+
   resources :organizations
   resources :users
-  devise_for :employees
-  root 'home#index', as: 'home_index'
+  resources :employees
   resources :transactions do
     get :void, on: :member
   end
-  resources :employees
+
+  namespace :admin do
+    resources :organizations
+    resources :users
+
+    root to: 'organizations#index'
+  end
 end

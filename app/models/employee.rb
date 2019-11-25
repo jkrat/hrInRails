@@ -1,28 +1,29 @@
 class Employee < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, optional: true
   belongs_to :organization
   has_many :transactions, dependent: :destroy
 
   enum department: {
-      'Office' => 0,
-      'Sales' => 1,
-      'Garage' => 2,
-      'Executive' => 3
-  }
-  enum permission_level: {
-      'Employee' => 0,
-      'Manager' => 1,
-      'Admin' => 2,
-      'Super' => 3
+    Office: 0,
+    Sales: 1,
+    Garage: 2,
+    Executive: 3
   }
   enum status: {
-      'Active' => 0,
-      'Inactive' => 1
+    Active: 0,
+    Inactive: 1
+  }
+  enum permission_level: {
+    Employee: 0,
+    Manager: 1,
+    Admin: 2,
+    Super: 3
   }
 
   validates :first_name, :last_name, :email, :start_date, :location, :region, presence: true
   validates :department, inclusion: departments.keys
   validates :status, inclusion: statuses.keys
+  validates :permission_level, inclusion: permission_levels.keys
   validates :balance, numericality: { greater_than_or_equal_to: 0 }
 
   scope :active, ->() { where('employees.status == ?', Employee.statuses['Active']) }
