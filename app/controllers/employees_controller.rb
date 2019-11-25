@@ -8,7 +8,7 @@ class EmployeesController < ApplicationController
   def index
     if current_user.employee
       puts '1 true --------------'
-      if current-user.employee.permission_level
+      if current_user.employee.permission_level
         puts current_user.employee.permission_level
       end
     else
@@ -25,7 +25,6 @@ class EmployeesController < ApplicationController
 
   # GET /employees/1
   def show
-    puts current_user.organization
     render layout: 'main_layout'
   end
 

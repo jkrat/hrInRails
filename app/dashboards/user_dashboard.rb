@@ -45,7 +45,6 @@ class UserDashboard < Administrate::BaseDashboard
   email
   organization
   sign_in_count
-  last_sign_in_at
   is_admin
   ].freeze
 
