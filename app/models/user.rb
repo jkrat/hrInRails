@@ -19,6 +19,7 @@ class User < ApplicationRecord
   end
 
   def assign_employee
+    # guard against non-employees
     @employee = Employee.find_by_email(email)
     self.employee = @employee
   end

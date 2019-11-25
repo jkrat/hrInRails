@@ -6,16 +6,6 @@ class EmployeesController < ApplicationController
 
   # GET /employees
   def index
-    if current_user.employee
-      puts '1 true --------------'
-      if current_user.employee.permission_level
-        puts current_user.employee.permission_level
-      end
-    else
-      puts current_user
-    end
-
-
     @employees = Employee.where(nil)
     @employees = @employees.region(params[:region]) if params[:region].present?
     @employees = @employees.location(params[:location]) if params[:location].present?
