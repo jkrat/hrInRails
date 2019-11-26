@@ -1,33 +1,45 @@
 class User < ApplicationRecord
   rolify
-  before_save :assign_employee
-  after_create :assign_role
-  after_update :assign_role
-
   has_one :employee
   belongs_to :organization, optional: true
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable
 
+  before_create :email_to_lowercase, :assign_employee
+  after_create :assign_role
+
   def to_s
     email
   end
 
+  private
+
+  def email_to_lowercase
+    email.strip.downcase
+  end
+
   def assign_employee
-    # guard against non-employees
     @employee = Employee.find_by_email(email)
-    self.employee = @employee
+    if @employee
+      self.employee = @employee
+      add.role :View_Access, @employee
+    end
   end
 
   def assign_role
-    @permission_level = employee ? employee.permission_level : 0
+    @permission_level = "Employee"
+    if employee
+      @permission_level = employee.permission_level
+      add_role :view_access, employee
+    end
+
     case @permission_level
-    when 1
+    when "Manager"
       add_role(:Manager)
-    when 2
+    when "Admin"
       add_role(:Admin)
-    when 3
+    when "Super"
       add_role(:Super)
     else
       add_role(:Employee)

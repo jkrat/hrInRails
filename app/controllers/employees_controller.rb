@@ -25,7 +25,6 @@ class EmployeesController < ApplicationController
 
   # GET /employees/1/edit
   def edit
-    puts Employee.permission_levels.keys
   end
 
   # POST /employees

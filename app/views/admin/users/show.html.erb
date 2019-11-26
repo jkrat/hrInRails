@@ -1,0 +1,79 @@
+<%#
+# Show
+
+This view is the template for the show page.
+It renders the attributes of a resource,
+as well as a link to its edit page.
+
+## Local variables:
+
+- `page`:
+  An instance of [Administrate::Page::Show][1].
+  Contains methods for accessing the resource to be displayed on the page,
+  as well as helpers for describing how each attribute of the resource
+  should be displayed.
+
+[1]: http://www.rubydoc.info/gems/administrate/Administrate/Page/Show
+%>
+
+<header class="main-content__header" role="banner">
+  <h1 class="main-content__page-title">
+    <%= page.resource %>
+  </h1>
+
+  <div>
+    <%= link_to(
+      t("administrate.actions.edit_resource", name: page.page_title),
+      [:edit, namespace, page.resource],
+      class: "button",
+    ) if valid_action?(:edit) && show_action?(:edit, page.resource) %>
+  </div>
+</header>
+
+<section class="main-content__body">
+  <dl>
+    <% page.attributes.each do |attribute| %>
+      <dt class="attribute-label" id="<%= attribute.name %>">
+      <%= t(
+        "helpers.label.#{resource_name}.#{attribute.name}",
+        default: attribute.name.titleize,
+      ) %>
+      </dt>
+
+      <dd class="attribute-data attribute-data--<%=attribute.html_class%>"
+          ><%= render_field attribute, page: page %></dd>
+    <% end %>
+  </dl>
+
+  <dl>
+    <dt class="attribute-label">EMPLOYEE</dt>
+    <dd class="attribute-data attribute-data--employee">
+      <table>
+        <tbody>
+        <tr>
+          <th>Name</th>
+          <th>Level</th>
+          <th>Location</th>
+          <th>Department</th>
+        </tr>
+        <% [page.resource.employee].each do |employee| %>
+          <tr class="js-table-row" tabindex="0">
+            <td >
+              <%= link_to "#{employee.first_name} #{employee.last_name}", employee  %>
+            </td>
+            <td class="cell-data cell-data--">
+              <%= employee.permission_level  %>
+            </td>
+            <td class="cell-data cell-data--">
+              <%= employee.location %>
+            </td>
+            <td class="cell-data cell-data--">
+              <%= employee.department %>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </dd>
+  </dl>
+</section>

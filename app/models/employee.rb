@@ -1,4 +1,6 @@
 class Employee < ApplicationRecord
+  resourcify
+
   belongs_to :user, optional: true
   belongs_to :organization
   has_many :transactions, dependent: :destroy
@@ -32,7 +34,7 @@ class Employee < ApplicationRecord
   scope :department, ->(department) { where department: department }
   scope :last_name, ->(last_name) { where('last_name like ?', "#{last_name}%")}
 
-  before_save :email_to_lowercase
+  before_save :email_to_lowercase, :assign_user
 
   def add_transaction(params)
     @transaction = transactions.build(params)
@@ -48,6 +50,11 @@ class Employee < ApplicationRecord
 
   def email_to_lowercase
     email.strip.downcase
+  end
+
+  def assign_user
+    @user = User.find_by_email(email)
+    self.user_id = @user.id if @user
   end
 
 end

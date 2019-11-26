@@ -9,7 +9,10 @@ class UserDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     employee: Field::HasOne,
-    organization: Field::BelongsTo,
+    organization: Field::BelongsTo.with_options(
+        searchable: true,
+        searchable_field: 'name'
+    ),
     id: Field::Number,
     email: Field::String,
     encrypted_password: Field::String,
@@ -68,7 +71,7 @@ class UserDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how users are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(user)
-  #   "User ##{user.id}"
-  # end
+  def display_resource(user)
+    user
+  end
 end
