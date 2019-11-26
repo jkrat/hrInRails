@@ -21,7 +21,6 @@ class UserDashboard < Administrate::BaseDashboard
     last_sign_in_at: Field::DateTime,
     current_sign_in_ip: Field::String,
     last_sign_in_ip: Field::String,
-    is_admin: Field::Boolean,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -35,7 +34,6 @@ class UserDashboard < Administrate::BaseDashboard
   id
   email
   organization
-   is_admin
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -45,7 +43,6 @@ class UserDashboard < Administrate::BaseDashboard
   email
   organization
   sign_in_count
-  is_admin
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -54,7 +51,6 @@ class UserDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
   email
   organization
-  is_admin
   ].freeze
 
   # COLLECTION_FILTERS

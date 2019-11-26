@@ -14,10 +14,6 @@ class User < ApplicationRecord
     email
   end
 
-  def admin?
-    is_admin
-  end
-
   def assign_employee
     # guard against non-employees
     @employee = Employee.find_by_email(email)
@@ -25,16 +21,16 @@ class User < ApplicationRecord
   end
 
   def assign_role
-    @permission_level = employee.permission_level
+    @permission_level = employee ? employee.permission_level : 0
     case @permission_level
-    when 0
-      add_role(:Employee)
     when 1
       add_role(:Manager)
     when 2
       add_role(:Admin)
     when 3
       add_role(:Super)
+    else
+      add_role(:Employee)
     end
   end
 

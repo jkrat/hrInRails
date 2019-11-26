@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_25_223549) do
+ActiveRecord::Schema.define(version: 2019_11_26_181722) do
 
   create_table "employees", force: :cascade do |t|
     t.string "first_name", null: false
@@ -77,7 +77,6 @@ ActiveRecord::Schema.define(version: 2019_11_25_223549) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
-    t.boolean "is_admin", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "organization_id"

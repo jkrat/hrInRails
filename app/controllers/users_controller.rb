@@ -1,8 +1,12 @@
 class UsersController < ApplicationController
   before_action :set_user
+  layout 'main_layout'
 
   def dashboard
-    @employee = user.employee
+    @employee = @user.employee
+    if not @employee
+      redirect_to root_path
+    end
   end
 
   private
