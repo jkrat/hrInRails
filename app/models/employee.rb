@@ -55,6 +55,7 @@ class Employee < ApplicationRecord
   def assign_user
     @user = User.find_by_email(email)
     self.user_id = @user.id if @user
+    @user.add_role 'View_Access', self
   end
 
 end

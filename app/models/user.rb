@@ -31,9 +31,9 @@ class User < ApplicationRecord
     @permission_level = "Employee"
     if employee
       @permission_level = employee.permission_level
-      add_role :view_access, employee
     end
 
+    # todo: scope roles to organization.  Leave other resource scoping to Pundit?
     case @permission_level
     when "Manager"
       add_role(:Manager)
