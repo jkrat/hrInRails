@@ -28,11 +28,13 @@ class User < ApplicationRecord
     @permission_level = employee.permission_level
     case @permission_level
     when 0
-      add_role(:employee)
+      add_role(:Employee)
+    when 1
+      add_role(:Manager)
     when 2
-      add_role(:admin)
+      add_role(:Admin)
     when 3
-      add_role(:super)
+      add_role(:Super)
     end
   end
 

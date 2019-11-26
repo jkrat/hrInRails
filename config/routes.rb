@@ -3,19 +3,19 @@ Rails.application.routes.draw do
       sessions: 'users/sessions'
   }
 
-  root 'home#index', as: 'home_index'
+  root to: 'home#index'
 
-  resources :organizations
-  resources :users
+  get '/users/dashboard', to: 'users#dashboard'
+  get '/organizations/dashboard', to: 'organizations#dashboard'
+
   resources :employees
   resources :transactions do
     get :void, on: :member
   end
 
   namespace :admin do
+    root to: 'organizations#index'
     resources :organizations
     resources :users
-
-    root to: 'organizations#index'
   end
 end

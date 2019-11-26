@@ -1,0 +1,6 @@
+<% if Rails.env.development? %>
+  <div class="container-fluid">
+    <%= debug params %>
+    <%= debug session.to_h %>
+  </div>
+<% end %>
