@@ -1,4 +1,6 @@
 class Organization < ApplicationRecord
+  resourcify
+
   has_many :users, dependent: :destroy
   has_many :employees, dependent: :destroy
 
