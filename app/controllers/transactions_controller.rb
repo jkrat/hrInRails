@@ -3,6 +3,7 @@ class TransactionsController < ApplicationController
 
   before_action :set_transaction, only: [:show, :edit, :void, :destroy]
   before_action :set_employee, only: [:new, :create]
+  before_action :set_user, only: [:new]
 
   # GET /transactions
   def index
@@ -21,13 +22,8 @@ class TransactionsController < ApplicationController
   # GET /transactions/new
   def new
     @transaction = Transaction.new(
-      created_by: 'Admin name'
+      created_by: @user.employee.first_name + ' ' + @user.employee.last_name
     )
-  end
-
-  # GET /transactions/1/edit
-  def edit
-    @employee = Employee.find(@transaction.employee_id)
   end
 
   # POST /transactions
@@ -76,6 +72,10 @@ class TransactionsController < ApplicationController
 
   def set_employee
     @employee = Employee.find(params[:employee_id])
+  end
+
+  def set_user
+    @user = User.find_by_email(current_user.email)
   end
 
   def transaction_params

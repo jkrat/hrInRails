@@ -64,7 +64,7 @@
       </tr>
       </thead>
       <tbody>
-      <% @employee.transactions.to_a.each do |transaction| %>
+      <% @employee.transactions.to_a.sort_by { |x| x.date }.reverse.each do |transaction| %>
       <tr class=<%= transaction.status == 'Void'? transaction.status :  transaction.transaction_type %>>
         <td style="width: 20%"> <%= transaction.date.strftime('%a, %b %d, %Y') %></td>
         <td><%= transaction.transaction_type %> </td>

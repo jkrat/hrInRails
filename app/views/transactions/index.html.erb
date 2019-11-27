@@ -12,7 +12,7 @@
   </tr>
   </thead>
   <tbody>
-    <% @transactions.each do |transaction| %>
+    <% @transactions.sort_by { |x| x.created_at }.reverse.each do |transaction| %>
       <tr class=<%= transaction.status == 'Void'? transaction.status :  transaction.transaction_type %> >
         <td><%= link_to "#{transaction.employee.first_name} #{transaction.employee.last_name}", transaction.employee %></td>
         <td><%= transaction.date %></td>
