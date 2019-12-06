@@ -156,7 +156,7 @@ GEM
     parser (2.6.5.0)
       ast (~> 2.4.0)
     public_suffix (4.0.1)
-    puma (3.12.1)
+    puma (3.12.2)
     rack (2.0.7)
     rack-protection (2.0.7)
       rack
@@ -294,7 +294,7 @@ DEPENDENCIES
   factory_bot_rails
   jbuilder
   listen
-  puma (~> 3.11)
+  puma (~> 3.12)
   rails (~> 6.0.0)
   redis
   rubocop
