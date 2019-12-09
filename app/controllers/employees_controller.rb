@@ -6,7 +6,8 @@ class EmployeesController < ApplicationController
 
   # GET /employees
   def index
-    @employees = Employee.where(nil)
+    puts current_user.has_role? :Super
+    @employees = policy_scope(Employee)
     @employees = @employees.region(params[:region]) if params[:region].present?
     @employees = @employees.location(params[:location]) if params[:location].present?
     @employees = @employees.department(Employee.departments[params[:department]]) if params[:department].present?
@@ -15,6 +16,7 @@ class EmployeesController < ApplicationController
 
   # GET /employees/1
   def show
+    authorize @employee
     render layout: 'main_layout'
   end
 
