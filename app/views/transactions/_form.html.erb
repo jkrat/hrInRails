@@ -29,7 +29,8 @@
       <div class="form-row">
         <div class="form-group col-md-6">
           <label class="col-form-label">Employee Name:</label>
-          <%= form.text_field :full_name, value: full_name, readonly: true, class: 'form-control form-control-lg' %>
+<!--          <%#= form.text_field :full_name, disabled: true, value: <%= full_name %>,  class: "form-control form-control-lg"%>-->
+          <input type="text" class="form-control form-control-lg" disabled="true" value= <%= full_name %> />
         </div>
       </div>
       <div class="form-row">
@@ -39,7 +40,7 @@
         </div>
         <div class="form-group col-md-6">
           <%= form.label :transaction_type, class: "col-form-label" %>
-          <%= form.select :transaction_type, Transaction.transaction_types.keys, {}, {class: "form-control"} %>
+          <%= form.select :transaction_type, Transaction.transaction_types.keys, {}, {class: "form-control  form-control-lg"} %>
         </div>
       </div>
       <div class="form-row">
