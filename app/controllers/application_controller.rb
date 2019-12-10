@@ -11,16 +11,18 @@ class ApplicationController < ActionController::Base
   def remove_roles
     if user_signed_in?
       @user = current_user
-      @user.roles.map { |role| @user.remove_role role.name }
+      @user.roles.map do |role|
+        @user.remove_role role.name unless role.name == 'Manager'
+      end
     end
   end
 
+  # Not sure if I need assign_employee method
   def assign_employee
     if user_signed_in?
       @user = current_user
       @employee = Employee.find_by_email @user.email
-      # @user.employee = @employee
-      # @user.add_role :View_Access, @employee if @employee
+      @user.employee = @employee
     end
   end
 
@@ -36,17 +38,18 @@ class ApplicationController < ActionController::Base
 
   def permission_case(level)
     case level
-      when 'Admin'
-        @user.add_role(:Admin)
-      when 'Super'
-        @user.add_role(:Super)
-      else
-        @user.add_role(:Employee)
+    when 'Admin'
+      @user.add_role :Admin
+    when 'Super'
+      @user.add_role :Admin
+      @user.add_role :Super
+    else
+      @user.add_role :Employee
     end
   end
 
   def user_not_authorized
-    flash[:alert] = "You are not authorized to perform this action."
+    flash[:alert] = 'You are not authorized to perform this action.'
     redirect_to(request.referrer || root_path)
   end
 end

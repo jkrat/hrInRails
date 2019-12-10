@@ -28,10 +28,11 @@ class Employee < ApplicationRecord
   validates :permission_level, inclusion: permission_levels.keys
   validates :balance, numericality: { greater_than_or_equal_to: 0 }
 
-  scope :active, ->() { where('employees.status == ?', Employee.statuses['Active']) }
-  scope :region, ->(region) { where region: region }
-  scope :location, ->(location) { where location: location }
-  scope :department, ->(department) { where department: department }
+  scope :active, ->() { where(status: Employee.statuses['Active']) }
+  scope :manager, -> { where(permission_level: Employee.permission_levels['Manager']) }
+  scope :region, ->(region) { where('employee.region == ?', region) }
+  scope :location, ->(location) { where('employee.location == ?', location) }
+  scope :department, ->(department) { where('employee.department == ?', department) }
   scope :last_name, ->(last_name) { where('last_name like ?', "#{last_name}%")}
 
   before_save :email_to_lowercase, :assign_user

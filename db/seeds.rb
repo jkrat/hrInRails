@@ -9,5 +9,3 @@
 # ['Employee', 'Manager', 'Admin', 'Super', 'View_Access'].each do |role_name|
 #       Role.create! name: role_name
 #     end
-
-Role.create! name: 'Super'

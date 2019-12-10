@@ -1,0 +1,23 @@
+
+<div class="container">
+  <h1>Employee Groups</h1>
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Manger</th>
+      <th>Employees</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @managers.each do |manager| %>
+      <tr>
+        <td><%= "#{manager.first_name} #{manager.last_name}" %></td>
+        <td>count</td>
+        <td><%= link_to 'View Details', group_path(manager.user_id), class: "btn btn-sm btn-primary" %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

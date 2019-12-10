@@ -6,7 +6,6 @@ class EmployeesController < ApplicationController
 
   # GET /employees
   def index
-    puts current_user.has_role? :Super
     @employees = policy_scope(Employee)
     @employees = @employees.region(params[:region]) if params[:region].present?
     @employees = @employees.location(params[:location]) if params[:location].present?
