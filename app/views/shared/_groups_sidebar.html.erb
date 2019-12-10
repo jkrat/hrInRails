@@ -4,13 +4,14 @@
       <%= link_to 'Back to All Groups', groups_path, class: 'nav-link' %>
     </div>
     <hr/>
-    <%= form_with url: "/groups/4/add_employee", method: :post, local: true do |form| %>
+    <%= form_with url: group_add_employee_path(id: 4), method: :post, local: true do |form| %>
       <div class="form-row">
         <div class="form-group col-md-10">
           <label class="col-form-label pb-0">Add Employee to Group:</label>
-          <input type="select" name="employee_id" class="form-control">
-            <select value="13">employee1</select>
-          </input>
+          <select name="employee_id" class="form-control">
+            <% available_employees_array = @group_details[:available_employees].map { |emp| ["#{emp.first_name} #{emp.last_name}", emp.id] } %>
+            <%= options_for_select(available_employees_array) %>
+          </select>
         </div>
       </div>
       <button type="submit" class="btn btn-sm btn-primary my-1" >

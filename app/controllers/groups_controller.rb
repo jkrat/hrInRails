@@ -3,7 +3,7 @@ class GroupsController < ApplicationController
   layout 'main_layout'
 
   before_action :set_manager, except: :index
-  before_action :set_employee, only: :remove_employee
+  before_action :set_employee, only: [:remove_employee, :add_employee]
 
   # GET /index
   def index
@@ -11,16 +11,20 @@ class GroupsController < ApplicationController
     @managers = @employees.manager
   end
 
+  # don't include managed employees in Available_employees
   # GET /groups/details/1
   def details
     @manager_roles = @manager.roles.select{ |role| role[:name] == 'Manager' and role[:resource_type] == 'Employee' }
     @managed_employees = @manager_roles.map{ |role| Employee.find(role.resource_id) }
-    @group_details = { manager: @manager, managed_employees: @managed_employees }
+    @available_employees = Employee.where(organization_id: @manager.organization_id )
+    @group_details = { manager: @manager, managed_employees: @managed_employees, available_employees: @available_employees }
+    render layout: 'groups_layout'
   end
 
   # POST /groups/1/add_employee?employee_id=155
   def add_employee
     @manager.add_role :Manager, @employee
+    redirect_to group_url(@manager.id)
   end
 
   # POST groups/addAllAtLocation/1?location=Arlingtion
