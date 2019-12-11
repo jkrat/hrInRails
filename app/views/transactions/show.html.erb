@@ -11,18 +11,18 @@
       </div>
       <div class="col-md-6">
         <h6 class="mb-0">Created On: </h6>
-        <h4> <%= @transaction.created_at.strftime('%b %d, %Y') %></h4>
+        <h4> <%= date_format(@transaction.created_at) %></h4>
       </div>
     </div>
     <hr />
     <div class="row my-3">
       <div class="col-md-6">
         <h6 class="mb-0">Employee: </h6>
-        <h4>  <%= link_to "#{@transaction.employee.first_name} #{@transaction.employee.last_name}", @transaction.employee %> </h4>
+        <h4>  <%= link_to employee_full_name(@transaction), @transaction.employee %> </h4>
       </div>
       <div class="col-md-6">
         <h6 class="mb-0">Date: </h6>
-        <h4> <%= @transaction.date.strftime('%a, %b %d, %Y') %></h4>
+        <h4> <%= date_format_with_day_of_week(@transaction.date) %></h4>
       </div>
     </div>
     <div class="row my-3">

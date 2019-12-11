@@ -7,8 +7,7 @@ class GroupsController < ApplicationController
 
   # GET /index
   def index
-    @employees = policy_scope(Employee)
-    @managers = @employees.manager
+    @managers = policy_scope(Employee).managers
   end
 
   # don't include managed employees in Available_employees
@@ -16,7 +15,7 @@ class GroupsController < ApplicationController
   def details
     @manager_roles = @manager.roles.select{ |role| role[:name] == 'Manager' and role[:resource_type] == 'Employee' }
     @managed_employees = @manager_roles.map{ |role| Employee.find(role.resource_id) }
-    @available_employees = Employee.where(organization_id: @manager.organization_id )
+    @available_employees = Employee.where(organization_id: @manager.organization_id).where.not(id: @managed_employees.map { |e| e.id }).where.not(id: @manager.employee.id)
     @group_details = { manager: @manager, managed_employees: @managed_employees, available_employees: @available_employees }
     render layout: 'groups_layout'
   end

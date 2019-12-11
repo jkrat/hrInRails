@@ -29,7 +29,7 @@ class Employee < ApplicationRecord
   validates :balance, numericality: { greater_than_or_equal_to: 0 }
 
   scope :active, ->() { where(status: Employee.statuses['Active']) }
-  scope :manager, -> { where(permission_level: Employee.permission_levels['Manager']) }
+  scope :managers, -> { where(permission_level: Employee.permission_levels['Manager']) }
   scope :region, ->(region) { where('employee.region == ?', region) }
   scope :location, ->(location) { where('employee.location == ?', location) }
   scope :department, ->(department) { where('employee.department == ?', department) }

@@ -12,16 +12,18 @@
   </tr>
   </thead>
   <tbody>
-    <% @transactions.sort_by { |x| x.created_at }.reverse.each do |transaction| %>
-      <tr class=<%= transaction.status == 'Void'? transaction.status :  transaction.transaction_type %> >
-        <td><%= link_to "#{transaction.employee.first_name} #{transaction.employee.last_name}", transaction.employee %></td>
-        <td><%= transaction.date %></td>
-        <td><%= transaction.transaction_type %></td>
-        <td><%= transaction.delta %></td>
-        <td><%= truncate(transaction.description, length: 28) %></td>
+    <% transactions_sorted_by_created_at.each do |t| %>
+      <% present(t) do |transaction| %>
+        <tr class=<%= transaction.row_status_color %> >
+          <td><%= link_to transaction.employee_full_name, transaction.employee %></td>
+          <td><%= transaction.date %></td>
+          <td><%= transaction.transaction_type %></td>
+          <td><%= transaction.delta %></td>
+          <td><%= transaction.short_description %></td>
 
-        <td><%= link_to 'View', transaction, class: "btn btn-sm btn-primary" %></td>
-      </tr>
+          <td><%= link_to 'View', transaction, class: "btn btn-sm btn-primary" %></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
