@@ -12,7 +12,9 @@ class ApplicationController < ActionController::Base
     if user_signed_in?
       @user = current_user
       @user.roles.map do |role|
-        @user.remove_role role.name unless role.name == 'Manager'
+        next if (role.name == 'Manager') && (role.resource_type == 'Employee')
+
+        @user.remove_role role
       end
     end
   end
@@ -38,6 +40,8 @@ class ApplicationController < ActionController::Base
 
   def permission_case(level)
     case level
+    when 'Manager'
+      @user.add_role :Manager
     when 'Admin'
       @user.add_role :Admin
     when 'Super'
