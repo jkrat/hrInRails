@@ -1,6 +1,6 @@
 module EmployeeHelper
 
-  def full_name
-    "#{@employee.first_name} #{@employee.last_name}"
+  def employees_sorted_by_last_name
+    @employees.sort_by(&:last_name)
   end
 end
