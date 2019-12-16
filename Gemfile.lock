@@ -76,6 +76,10 @@ GEM
     bindex (0.8.1)
     bootsnap (1.4.5)
       msgpack (~> 1.0)
+    bootstrap (4.4.1)
+      autoprefixer-rails (>= 9.1.0)
+      popper_js (>= 1.14.3, < 2)
+      sassc-rails (>= 2.0.0)
     builder (3.2.3)
     byebug (11.0.1)
     capybara (3.29.0)
@@ -155,8 +159,11 @@ GEM
     parallel (1.19.1)
     parser (2.6.5.0)
       ast (~> 2.4.0)
+    popper_js (1.14.5)
     public_suffix (4.0.1)
     puma (3.12.2)
+    pundit (2.1.0)
+      activesupport (>= 3.0.0)
     rack (2.0.7)
     rack-protection (2.0.7)
       rack
@@ -239,6 +246,9 @@ GEM
       rack (>= 2.0.0)
       rack-protection (>= 2.0.0)
       redis (>= 4.1.0)
+    simple_form (5.0.1)
+      actionpack (>= 5.0)
+      activemodel (>= 5.0)
     spring (2.1.0)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -254,12 +264,15 @@ GEM
     thor (0.20.3)
     thread_safe (0.3.6)
     tilt (2.0.10)
+    timeliness (0.4.3)
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
     unicode-display_width (1.6.0)
+    validates_timeliness (4.1.1)
+      timeliness (>= 0.3.10, < 1)
     warden (1.2.8)
       rack (>= 2.0.6)
     web-console (4.0.1)
@@ -289,13 +302,16 @@ DEPENDENCIES
   administrate
   bcrypt (~> 3.1.7)
   bootsnap (>= 1.4.2)
+  bootstrap (~> 4.4.1)
   byebug
   capybara
   devise
   factory_bot_rails
   jbuilder
+  jquery-rails
   listen
   puma (~> 3.12)
+  pundit
   rails (~> 6.0.0)
   redis
   rolify
@@ -303,10 +319,12 @@ DEPENDENCIES
   sass-rails (~> 5)
   selenium-webdriver
   sidekiq
+  simple_form (~> 5.0)
   spring
   spring-watcher-listen
   sqlite3 (~> 1.4)
   turbolinks (~> 5)
+  validates_timeliness (~> 4.1)
   web-console
   webdrivers
   webpacker (~> 4.0)
