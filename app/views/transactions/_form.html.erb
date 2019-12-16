@@ -1,60 +1,40 @@
-<%= form_with(model: transaction, url: transactions_path(employee_id: @employee), local: true) do |form| %>
-  <% if transaction.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
 
-      <ul>
-        <% transaction.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= simple_form_for @transaction, url: transactions_path do |f| %>
 
-  <div class="card">
-    <div class="card-header">
-      <h2>Create Transaction</h2>
+  <%= f.error_notification %>
+
+  <%= hidden_field_tag(:employee_id, @employee.id) %>
+
+  <div class="form-row">
+    <%= f.input :created_by, wrapper_html: { class: 'col-md-6' } %>
+
+    <%= f.input :created_at, as: :date, disabled: true, wrapper_html: { class: 'col-md-6' } %>
+  </div>
+
+  <div class="form-row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label class="col-form-label">Employee Name</label>
+        <input type="text" class="form-control form-control-md" disabled="true" value= <%= full_name(@employee) %> />
+      </div>
+
+      <%= f.input :transaction_type, collection: Transaction.transaction_types.keys, selected: Transaction.transaction_types.first %>
     </div>
-    <div class="card-body">
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <%= form.label :created_by, class: "col-form-label" %>
-          <%= form.text_field :created_by, class: "form-control form-control-lg"%>
-        </div>
-        <div class="form-group col-md-6">
-          <label class="col-form-label">Created At:</label>
-          <input type="date" class="form-control form-control-lg" disabled="true" value= <%= @transaction.created_at || Date.today %> />
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label class="col-form-label">Employee Name:</label>
-<!--          form field only showing first name?-->
-          <input type="text" class="form-control form-control-lg" disabled="true" value= <%= full_name %> />
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <%= form.label :date, class: "col-form-label" %>
-          <%= form.date_select :date, class: "form-control form-control-lg"%>
-        </div>
-        <div class="form-group col-md-6">
-          <%= form.label :transaction_type, class: "col-form-label" %>
-          <%= form.select :transaction_type, Transaction.transaction_types.keys, {}, {class: "form-control  form-control-lg"} %>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-md-12">
-          <%= form.label :description, class: "col-form-label" %>
-          <%= form.text_area :description , rows: 5, class: "form-control form-control-lg" %>
-        </div>
-      </div>
+
+    <%= f.input :date, wrapper_html: { class: 'col-md-6' } %>
+
+  </div>
+
+  <div class="form-row">
+    <div class="col-md-12">
+    <%= f.input :description, as: :text %>
     </div>
   </div>
+
   <div class="text-right mt-3">
     <div class="actions">
       <%= link_to 'Cancel', :back, class: "btn btn-secondary" %>
-      <%= form.submit class: "btn btn-primary" %>
+      <%= f.submit class: "btn btn-primary" %>
     </div>
   </div>
 <% end %>

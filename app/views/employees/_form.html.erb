@@ -1,103 +1,45 @@
 
+<%= simple_form_for @employee, url: @employees do |f| %>
 
-    <%= simple_form_for @employee, url: @employees do |f| %>
+  <%= f.error_notification %>
 
-      <%= f.error_notification %>
+  <div class="form-row">
+    <%= f.input :first_name, wrapper_html: { class: 'col-md-6' } %>
 
-      <div class="form-row">
-        <%= f.input :first_name, wrapper_html: { class: 'col-md-6' } %>
+    <%= f.input :last_name, wrapper_html: { class: 'col-md-6' } %>
+  </div>
 
-        <%= f.input :last_name, wrapper_html: { class: 'col-md-6' } %>
-      </div>
+  <div class="form-row">
+    <%= f.input :email,  wrapper_html: { class: form_email_class(action_name) } %>
 
-      <div class="form-row">
-        <%= f.input :email,  wrapper_html: { class: form_email_class(action_name) } %>
-
-        <% if action_name == 'edit' %>
-          <%= f.input :status, collection: Employee.statuses.keys, selected: Employee.statuses.first, wrapper_html: { class: 'col-md-4' } %>
-        <% end %>
-      </div>
-
-      <div class="form-row">
-        <%= f.input :region, wrapper_html: { class: 'col-md-4' }%>
-
-        <%= f.input :location, wrapper_html: { class: 'col-md-4' } %>
-
-        <%= f.input :department, collection: Employee.departments.keys, prompt: 'Select Department', wrapper_html: { class: 'col-md-4' } %>
-      </div>
-
-      <%= f.input :start_date %>
-
-      <div class="form-row">
-        <%= f.input :balance, wrapper_html: { class: 'col-md-6' } %>
-
-        <%= f.input :permission_level, collection: Employee.permission_levels.keys, selected: Employee.permission_levels.first, wrapper_html: { class: 'col-md-6' } %>
-      </div>
-
-      <div class="text-right mt-3">
-        <div class="actions">
-          <%= link_to 'Cancel', :back, class: "btn btn-secondary" %>
-          <%= f.button :submit, class: "btn btn-primary" %>
-        </div>
-      </div>
-
+    <% if action_name == 'edit' %>
+      <%= f.input :status, collection: Employee.statuses.keys, selected: Employee.statuses.first, wrapper_html: { class: 'col-md-4' } %>
     <% end %>
+  </div>
 
+  <div class="form-row">
+    <%= f.input :region, wrapper_html: { class: 'col-md-4' }%>
 
-<!--      <div class="form-row">-->
-<!--        <div class="form-group col-md-6">-->
-          <%#= form.label :first_name, class: "col-form-label" %>
-          <%#= form.text_field :first_name, class: "form-control form-control-lg"%>
-<!--        </div>-->
-<!--        <div class="form-group col-md-6">-->
-          <%#= form.label :last_name, class: "col-form-label" %>
-          <%#= form.text_field :last_name, class: "form-control form-control-lg"%>
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="form-row">-->
-<!--        <div class="form-group col-md-12">-->
-          <%#= form.label :email, class: "col-form-label" %>
-          <%#= form.text_field :email, class: "form-control form-control-lg"%>
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="form-row">-->
-<!--        <div class="form-group col-md-4">-->
-          <%#= form.label :region, class: "col-form-label" %>
-          <%#= form.text_field :region, class: "form-control form-control-lg"%>
-<!--        </div>-->
-<!--        <div class="form-group col-md-4">-->
-          <%#= form.label :location, class: "col-form-label" %>
-          <%#= form.text_field :location, class: "form-control form-control-lg"%>
-<!--        </div>-->
-<!--        <div class="form-group col-md-4">-->
-          <%#= form.label :department, class: "col-form-label" %>
-          <%#= form.select :department, Employee.departments.keys, {prompt: 'Select Department'}, {class: "form-control form-control-lg"} %>
-<!--        </div>-->
-<!--      </div>-->
-<!--      <div class="form-row">-->
-<!--        <div class="form-group col-md-4">-->
-          <%#= form.label :start_date, class: "col-form-label" %>
-          <%#= form.date_select :start_date, class: "form-control form-control-lg"%>
-<!--        </div>-->
-<!--        <div class="form-group col-md-4">-->
-          <%#= form.label :balance, class: "col-form-label" %>
-          <%#= form.text_field :balance, class: "form-control form-control-lg"%>
-<!--        </div>-->
-<!--        <div class="form-group col-md-4">-->
-          <%#= form.label :permission_level, class: "col-form-label" %>
-          <%#= form.select :permission_level, Employee.permission_levels.keys, {prompt: 'Select Department'}, {class: "form-control form-control-lg"} %>
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    <div class="field">-->
-      <%#= form.label :status %>
-      <%#= form.select :status, Employee.statuses.keys, prompt: 'Select Status' %>
-<!--    </div>-->
-<!--  </div>-->
+    <%= f.input :location, wrapper_html: { class: 'col-md-4' } %>
 
+    <%= f.input :department, collection: Employee.departments.keys, prompt: 'Select Department', wrapper_html: { class: 'col-md-4' } %>
+  </div>
 
+  <%= f.input :start_date %>
 
+  <div class="form-row">
+    <%= f.input :balance, wrapper_html: { class: 'col-md-6' } %>
 
+    <%= f.input :permission_level, collection: Employee.permission_levels.keys, selected: Employee.permission_levels.first, wrapper_html: { class: 'col-md-6' } %>
+  </div>
 
+  <div class="text-right mt-3">
+    <div class="actions">
+      <%= link_to 'Cancel', :back, class: "btn btn-secondary" %>
+      <%= f.button :submit, class: "btn btn-primary" %>
+    </div>
+  </div>
+
+<% end %>
 
 
