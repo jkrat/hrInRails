@@ -23,6 +23,7 @@ class Employee < ApplicationRecord
   }
 
   validates :first_name, :last_name, :email, :start_date, :location, :region, presence: true
+  validates :email, format: { with: /.+@.+\.{1}.{2,}/ }
   validates :department, inclusion: departments.keys
   validates :status, inclusion: statuses.keys
   validates :permission_level, inclusion: permission_levels.keys
