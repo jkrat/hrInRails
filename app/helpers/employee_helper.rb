@@ -11,4 +11,12 @@ module EmployeeHelper
                'col-md-8'
              end
   end
+
+  def form_start_date_class(action_name)
+    @class = if action_name == 'new'
+               'single'
+             else
+               'none'
+             end
+  end
 end

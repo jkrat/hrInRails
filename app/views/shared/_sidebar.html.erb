@@ -26,9 +26,8 @@
     </div>
     <div class="form-row">
       <div class="form-group col-md-10">
-        <!--          <label class="col-form-label pb-0">Department:</label>-->
-        <%= form.label :department %>
-        <%= form.select :department, Employee.departments.keys, prompt: 'All Departments' %>
+        <%= form.label :department, 'Department:' %>
+        <%= form.select :department, Employee.departments.keys, { prompt: 'All Departments' }, { class: "form-control" } %>
       </div>
     </div>
     <div class="form-row" style="height:89px"></div>
