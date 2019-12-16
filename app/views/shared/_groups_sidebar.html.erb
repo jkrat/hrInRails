@@ -1,0 +1,23 @@
+<div class="sidebar">
+  <div>
+    <div class="mt-3">
+      <%= link_to 'Back to All Groups', groups_path, class: 'nav-link' %>
+    </div>
+    <hr/>
+    <%= form_with url: group_add_employee_path(id: 4), method: :post, local: true do |form| %>
+      <div class="form-row">
+        <div class="form-group col-md-10">
+          <label class="col-form-label pb-0">Add Employee to Group:</label>
+          <select name="employee_id" class="form-control">
+            <% available_employees_array = @group_details[:available_employees].map { |emp| ["#{emp.first_name} #{emp.last_name}", emp.id] } %>
+            <%= options_for_select(available_employees_array) %>
+          </select>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-sm btn-primary my-1" >
+        Add Employee
+      </button>
+    <% end %>
+    <hr />
+  </div>
+</div>

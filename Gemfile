@@ -13,6 +13,8 @@ gem 'sidekiq'
 
 gem 'bcrypt', '~> 3.1.7'
 gem 'devise'
+gem 'rolify'
+gem 'pundit'
 gem 'jbuilder'
 
 #  Admin

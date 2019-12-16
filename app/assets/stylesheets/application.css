@@ -109,3 +109,9 @@ tr.Inactive {
 tr.Void {
     background-color: #e6bbbf !important;
 }
+
+.header-items {
+    display: flex;
+    justify-content: space-between;
+    width: 100%
+}

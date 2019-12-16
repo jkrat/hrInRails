@@ -200,6 +200,7 @@ GEM
     responders (3.0.0)
       actionpack (>= 5.0)
       railties (>= 5.0)
+    rolify (5.2.0)
     rubocop (0.76.0)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
@@ -297,6 +298,7 @@ DEPENDENCIES
   puma (~> 3.12)
   rails (~> 6.0.0)
   redis
+  rolify
   rubocop
   sass-rails (~> 5)
   selenium-webdriver
