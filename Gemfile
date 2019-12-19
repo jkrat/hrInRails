@@ -6,7 +6,6 @@ ruby '2.6.5'
 gem 'rails', '~> 6.0.0'
 
 gem 'bootsnap', '>= 1.4.2', require: false
-gem 'sqlite3', '~> 1.4'
 gem 'puma', '~> 3.12'
 gem 'redis'
 gem 'sidekiq'
@@ -31,6 +30,7 @@ gem 'simple_calendar'
 #  Admin
 gem 'administrate'
 gem 'pghero'
+gem 'pg_query', '>= 0.9.0'
 
 # Front-end
 gem 'sass-rails', '~> 5'
