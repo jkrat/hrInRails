@@ -11,16 +11,14 @@
   </tr>
   </thead>
   <tbody>
-    <% employees_sorted_by_last_name.each do |e| %>
-      <% present(e) do |employee| %>
-        <tr class=<%= employee.status %> >
+    <% @employees.each do |employee| %>
+      <tr class="<%= employee.status %>">
         <td><%= link_to employee.full_name, employee  %></td>
           <td><%= employee.region %></td>
           <td><%= employee.location %></td>
           <td><%= employee.department %></td>
           <td><%= employee.balance %></td>
         </tr>
-      <% end %>
     <% end %>
   </tbody>
 </table>

@@ -1,9 +1,10 @@
 module ApplicationHelper
 
   def present(model, presenter_class = nil)
-    klass = presenter_class || "#{model.class}Presenter".constantize
-    presenter = klass.new(model, self)
-    yield(presenter) if block_given?
+    models = Array.wrap(model)
+    klass = presenter_class || "#{models.first.class}Presenter".constantize
+    presenters = models.map { |m| klass.new(m, self) }
+    presenters.size == 1 ? presenters.first : presenters
   end
 
   def date_format(date)

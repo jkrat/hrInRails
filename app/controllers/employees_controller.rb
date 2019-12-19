@@ -1,4 +1,5 @@
 class EmployeesController < ApplicationController
+  include ApplicationHelper
   before_action :authenticate_user!
   layout 'list_layout'
 
@@ -11,11 +12,13 @@ class EmployeesController < ApplicationController
     @employees = @employees.location(params[:location]) if params[:location].present?
     @employees = @employees.department(Employee.departments[params[:department]]) if params[:department].present?
     @employees = @employees.last_name(params[:search]) if params[:search].present?
+    @employees = present(@employees.by_name)
   end
 
   # GET /employees/1
   def show
     authorize @employee
+    @employee = present(@employee)
     render layout: 'main_layout'
   end
 
