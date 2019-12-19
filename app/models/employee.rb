@@ -37,7 +37,8 @@ class Employee < ApplicationRecord
   scope :department, ->(department) { where('employee.department == ?', department) }
   scope :last_name, ->(last_name) { where('last_name like ?', "#{last_name}%")}
 
-  before_save :email_to_lowercase, :assign_user
+  before_save :email_to_lowercase
+  # before_save :email_to_lowercase, :assign_user,
 
   def add_transaction(params)
     @transaction = transactions.build(params)
