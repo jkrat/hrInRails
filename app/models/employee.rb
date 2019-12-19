@@ -36,9 +36,8 @@ class Employee < ApplicationRecord
   scope :location, ->(location) { where('employee.location == ?', location) }
   scope :department, ->(department) { where('employee.department == ?', department) }
   scope :last_name, ->(last_name) { where('last_name like ?', "#{last_name}%")}
-
-  before_save :email_to_lowercase
-  # before_save :email_to_lowercase, :assign_user,
+  
+  before_save :email_to_lowercase, :assign_user
 
   def add_transaction(params)
     @transaction = transactions.build(params)
@@ -61,7 +60,7 @@ class Employee < ApplicationRecord
     return unless @user
 
     self.user_id = @user.id
-    @user.add_role 'View_Access', self
+    @user.add_role :View_Access, self
   end
 
 end
