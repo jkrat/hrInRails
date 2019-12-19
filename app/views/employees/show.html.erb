@@ -65,11 +65,7 @@
         </thead>
         <tbody>
 
-        <%# render @employee.transactions %>
-
-          <% puts @employee.sorted_transactions.size() %>
-
-          <% present(@employee.sorted_transactions).each do |transaction| %>
+          <% ensure_array(present(@employee.transactions)).each do |transaction| %>
             <tr class=<%= transaction.row_status_color %> >
               <td style="width: 20%"> <%= date_format_with_day_of_week(transaction.date) %></td>
               <td><%= transaction.transaction_type %> </td>

@@ -1,9 +1,11 @@
 class UsersController < ApplicationController
+  include PresenterConcern
   before_action :set_user
   layout 'main_layout'
 
   def dashboard
     @employee = @user.employee
+    @employee = present(@employee)
     if not @employee
       redirect_to root_path
     end

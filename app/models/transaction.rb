@@ -16,6 +16,9 @@ class Transaction < ApplicationRecord
   validates :date, presence: true
   validates :transaction_type, inclusion: transaction_types.keys
 
+  scope :by_creation, -> { order(:created_at) }
+  scope :by_date, -> { order(date: :desc).order(created_at: :desc) }
+
   def delta=(adjustment_amount)
     scheduled_delta = -1
     unscheduled_delta = -2

@@ -24,5 +24,6 @@ Rails.application.routes.draw do
     resources :users
   end
 
+  mount PgHero::Engine, at: "pghero"
 
 end

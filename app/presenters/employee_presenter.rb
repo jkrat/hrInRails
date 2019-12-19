@@ -1,14 +1,16 @@
 class EmployeePresenter < ApplicationPresenter
+  include PresenterConcern
 
   def full_name
     @view.full_name(@model)
   end
 
-  def sorted_transactions
-    @model.transactions.sort_by(&:date).reverse
+  def trans_count
+    @model.transactions.size
   end
 
-  def trans_count
-    @model.transactions.count
+  def transactions
+    @model.transactions.by_date
   end
+
 end

@@ -24,7 +24,7 @@ class User < ApplicationRecord
   end
 
   def assign_organization
-    @organization = Organization.find(1)
+    @organization = Organization.find(@employee.organization_id)
     self.organization = @organization
   end
 

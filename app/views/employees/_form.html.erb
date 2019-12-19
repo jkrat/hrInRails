@@ -29,7 +29,8 @@
     <% if action_name == 'edit' %>
       <%= f.input :start_date, as: :string, disabled: true, wrapper_html: { class: 'col-md-4' }%>
     <% else %>
-      <%= f.input :start_date, as: :string, input_html: { 'data-key': 'single' }, wrapper_html: { class: 'col-md-4' }%>
+      <%= f.input :start_date, wrapper_html: { class: 'col-md-4' }%>
+      <%#= f.input :start_date, as: :string, input_html: { 'data-key': 'single' }, wrapper_html: { class: 'col-md-4' }%>
     <% end %>
 
     <%= f.input :balance, wrapper_html: { class: 'col-md-4' } %>
