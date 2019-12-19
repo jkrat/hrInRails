@@ -10,6 +10,7 @@ gem 'sqlite3', '~> 1.4'
 gem 'puma', '~> 3.12'
 gem 'redis'
 gem 'sidekiq'
+gem 'pg'
 
 gem 'bcrypt', '~> 3.1.7'
 gem 'devise'
@@ -23,8 +24,13 @@ gem 'jquery-rails'
 gem 'simple_form', '~> 5.0'
 gem 'validates_timeliness', '~> 4.1'
 
+gem 'groupdate'
+gem 'chartkick'
+gem 'simple_calendar'
+
 #  Admin
 gem 'administrate'
+gem 'pghero'
 
 # Front-end
 gem 'sass-rails', '~> 5'
