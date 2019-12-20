@@ -6,7 +6,7 @@ require 'date'
 Organization.create(name: 'Thirtysixteen', slug: 'tsg', is_active: false)
 Organization.create(name: 'Vandelay Autos', slug: 'vandelay', is_active: true)
 Organization.create(name: 'Chacon Autos', slug: 'chacon', is_active: true)
-Organization.create(name: 'Auto USA', slug: 'ausa', is_active: true)
+Organization.create(name: 'Auto USA', slug: 'ausa', is_active: false)
 
 Employee.create(first_name: 'Jim', last_name: 'Kratus', email: 'jk@tsg.com', balance: 16, start_date: DateTime.now, location: 'nwhwy', department: 0, region: 'Dallas - Ft. Worth', status: 0, organization_id: 2, permission_level: 3)
 Employee.create(first_name: 'Roberto', last_name: 'Firmino', email: 'rf@tsg.com', balance: 12, start_date: DateTime.now, location: 'arlington', department: 2, region: 'Dallas - Ft. Worth', status: 0, organization_id: 4, permission_level: 0)

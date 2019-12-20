@@ -16,6 +16,7 @@ gem 'devise'
 gem 'rolify'
 gem 'pundit'
 gem 'jbuilder'
+gem 'faker'
 
 # Custom
 gem 'bootstrap', '~> 4.4.1'
