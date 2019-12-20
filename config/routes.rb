@@ -5,7 +5,11 @@ Rails.application.routes.draw do
 
   root to: 'home#index'
 
-  get '/users/dashboard', to: 'users#dashboard'
+  resources :users, only: [:index] do
+    post :impersonate, on: :member
+    post :stop_impersonating, on: :collection
+  end
+
   get '/organizations/dashboard', to: 'organizations#dashboard'
 
   get '/groups', to: 'groups#index'

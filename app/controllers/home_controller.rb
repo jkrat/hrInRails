@@ -5,9 +5,9 @@ class HomeController < ApplicationController
       if current_user.employee
         case current_user.employee.permission_level
         when "Employee"
-          redirect_to users_dashboard_path
+          redirect_to users_path
         when "Manager"
-          redirect_to users_dashboard_path
+          redirect_to users_path
         when 'Admin'
           redirect_to employees_path
         when 'Super'

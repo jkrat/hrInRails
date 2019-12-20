@@ -80,6 +80,10 @@ to display a collection of resources in an HTML table.
           <% end %>
         </td>
 
+        <%# if valid_action? :edit, collection_presenter.resource_name %>
+          <td><%= link_to "Sign in as", impersonate_user_path(resource), method: :post, class: "action-edit" %></td>
+        <%# end %>
+
         <% if valid_action? :edit, collection_presenter.resource_name %>
           <td><%= link_to(
             t("administrate.actions.edit"),

@@ -31,6 +31,7 @@ gem 'simple_calendar'
 gem 'administrate'
 gem 'pghero'
 gem 'pg_query', '>= 0.9.0'
+gem 'pretender'
 
 # Front-end
 gem 'sass-rails', '~> 5'
