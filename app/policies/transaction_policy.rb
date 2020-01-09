@@ -8,5 +8,13 @@ class TransactionPolicy < ApplicationPolicy
         scope.where(employee_id: @managed_employees)
       end
     end
+
+    def create?
+      user.allowed?('applicant:invite')
+    end
+
+    def show?
+      user.allowed?('applicant:read')
+    end
   end
 end

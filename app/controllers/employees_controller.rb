@@ -24,6 +24,10 @@ class EmployeesController < ApplicationController
 
   # GET /employees/new
   def new
+    unless current_user.allowed?('applicant:invite')
+      render :unauthorized && return
+    end
+
     @employee = Employee.new
   end
 

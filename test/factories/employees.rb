@@ -27,6 +27,8 @@ FactoryBot.define do
     department { Employee.departments['Sales'] }
     region { 'Dallas - Ft. Worth' }
     balance { 4 }
+    status { Employee.statuses['Active'] }
+    permission_level { Employee.permission_levels['Employee'] }
 
     factory :employee_with_transactions do
       last_name { ' Dirt '}
