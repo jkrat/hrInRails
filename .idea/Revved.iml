@@ -98,7 +98,7 @@
     <orderEntry type="library" scope="PROVIDED" name="public_suffix (v4.0.1, rbenv: 2.6.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="puma (v3.12.2, rbenv: 2.6.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="pundit (v2.1.0, rbenv: 2.6.5) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="rack (v2.0.7, rbenv: 2.6.5) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rack (v2.0.8, rbenv: 2.6.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rack-protection (v2.0.7, rbenv: 2.6.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rack-proxy (v0.6.5, rbenv: 2.6.5) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rack-test (v1.1.0, rbenv: 2.6.5) [gem]" level="application" />
