@@ -1,10 +1,16 @@
 module ApplicationHelper
 
-  def present(model, presenter_class = nil)
+  def present(model, view = self, presenter_class = nil)
     models = Array.wrap(model)
+    return models if models.empty?
+
     klass = presenter_class || "#{models.first.class}Presenter".constantize
-    presenters = models.map { |m| klass.new(m, self) }
+    presenters = models.map { |m| klass.new(m, view) }
     presenters.size == 1 ? presenters.first : presenters
+  end
+
+  def ensure_array(t)
+    return Array.wrap(t)
   end
 
   def date_format(date)

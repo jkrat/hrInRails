@@ -10,7 +10,7 @@
   </div>
 
   <div class="form-row">
-    <%= f.input :email,  wrapper_html: { class: form_email_class(action_name) } %>
+    <%= f.input :email,  wrapper_html: { class: 'col-md-12' } %>
 
     <% if action_name == 'edit' %>
       <%= f.input :status, collection: Employee.statuses.keys, selected: Employee.statuses.first, wrapper_html: { class: 'col-md-4' } %>
@@ -26,11 +26,7 @@
   </div>
 
   <div class="form-row">
-    <% if action_name == 'edit' %>
-      <%= f.input :start_date, as: :string, disabled: true, wrapper_html: { class: 'col-md-4' }%>
-    <% else %>
       <%= f.input :start_date, as: :string, input_html: { 'data-key': 'single' }, wrapper_html: { class: 'col-md-4' }%>
-    <% end %>
 
     <%= f.input :balance, wrapper_html: { class: 'col-md-4' } %>
 

@@ -1,5 +1,5 @@
 class EmployeesController < ApplicationController
-  include ApplicationHelper
+  include PresenterConcern
   before_action :authenticate_user!
   layout 'list_layout'
 
@@ -24,12 +24,15 @@ class EmployeesController < ApplicationController
 
   # GET /employees/new
   def new
+    unless current_user.allowed?('applicant:invite')
+      render :unauthorized && return
+    end
+
     @employee = Employee.new
   end
 
   # GET /employees/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /employees
   def create

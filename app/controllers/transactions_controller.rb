@@ -1,4 +1,5 @@
 class TransactionsController < ApplicationController
+  include PresenterConcern
   layout 'list_layout'
 
   before_action :set_transaction, only: [:show, :edit, :void, :destroy]
@@ -7,11 +8,12 @@ class TransactionsController < ApplicationController
 
   # GET /transactions
   def index
-    @transactions = Transaction.where(nil)
+    @transactions = policy_scope(Transaction)
     @transactions = @transactions.includes(:employee).where(employees: { region: params[:region] }) if params[:region].present?
     @transactions = @transactions.includes(:employee).where(employees: { location: params[:location] }) if params[:location].present?
     @transactions = @transactions.includes(:employee).where(employees: { department: Employee.departments[params[:department]] }) if params[:department].present?
     @transactions = @transactions.includes(:employee).where(employees: { last_name: params[:search] }) if params[:search].present?
+    @transactions = present(@transactions)
   end
 
   # GET /transactions/1

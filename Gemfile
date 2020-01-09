@@ -6,7 +6,6 @@ ruby '2.6.5'
 gem 'rails', '~> 6.0.0'
 
 gem 'bootsnap', '>= 1.4.2', require: false
-gem 'sqlite3', '~> 1.4'
 gem 'puma', '~> 3.12'
 gem 'redis'
 gem 'sidekiq'
@@ -17,6 +16,7 @@ gem 'devise'
 gem 'rolify'
 gem 'pundit'
 gem 'jbuilder'
+gem 'faker'
 
 # Custom
 gem 'bootstrap', '~> 4.4.1'
@@ -31,6 +31,8 @@ gem 'simple_calendar'
 #  Admin
 gem 'administrate'
 gem 'pghero'
+gem 'pg_query', '>= 0.9.0'
+gem 'pretender'
 
 # Front-end
 gem 'sass-rails', '~> 5'
@@ -45,8 +47,8 @@ end
 group :development do
   gem 'web-console'
   gem 'listen'
-  gem 'spring'
-  gem 'spring-watcher-listen'
+  # gem 'spring'
+  # gem 'spring-watcher-listen'
   gem 'rubocop'
 end
 

@@ -13,9 +13,9 @@
     <tbody>
     <% @managers.each do |manager| %>
       <tr>
-        <td><%= "#{manager.first_name} #{manager.last_name}" %></td>
-        <td>count</td>
-        <td><%= link_to 'View Details', group_path(manager.user_id), class: "btn btn-sm btn-primary" %></td>
+        <td><%= manager.full_name %></td>
+        <td><%= manager.group_size %></td>
+        <td><%= link_to 'View Details', groups_path(manager.user_id), class: "btn btn-sm btn-primary" %></td>
       </tr>
     <% end %>
     </tbody>

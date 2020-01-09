@@ -1,4 +1,5 @@
 class GroupsController < ApplicationController
+  include PresenterConcern
   before_action :authenticate_user!
   layout 'main_layout'
 
@@ -8,11 +9,12 @@ class GroupsController < ApplicationController
   # GET /index
   def index
     @managers = policy_scope(Employee).managers
+    @managers = present(@managers)
   end
 
   # don't include managed employees in Available_employees
-  # GET /groups/details/1
-  def details
+  # GET /groups/show/1
+  def show
     @manager_roles = @manager.roles.select{ |role| role[:name] == 'Manager' and role[:resource_type] == 'Employee' }
     @managed_employees = @manager_roles.map{ |role| Employee.find(role.resource_id) }
     @available_employees = Employee.where(organization_id: @manager.organization_id).where.not(id: @managed_employees.map { |e| e.id }).where.not(id: @manager.employee.id)

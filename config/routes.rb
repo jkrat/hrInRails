@@ -5,13 +5,18 @@ Rails.application.routes.draw do
 
   root to: 'home#index'
 
-  get '/users/dashboard', to: 'users#dashboard'
+  resources :users, only: [:index] do
+    post :impersonate, on: :member
+    post :stop_impersonating, on: :collection
+  end
+
+  get '/create_trial', to: 'users#create_employees'
   get '/organizations/dashboard', to: 'organizations#dashboard'
 
-  get '/groups', to: 'groups#index'
-  get '/groups/:id', to: 'groups#details', as: 'group'
-  get 'groups/:id/remove_employee/:employee_id', to: 'groups#remove_employee', as: 'group_remove_employee'
-  post 'groups/:id/add_employee', to: 'groups#add_employee', as: 'group_add_employee'
+  resources :groups, only: [:index, :show] do
+    post 'groups/:id/add', to: 'groups#add_employee', as: 'group_add_employee'
+    get 'groups/:id/remove/:employee_id', to: 'groups#remove_employee', as: 'group_remove_employee'
+  end
 
   resources :employees
   resources :transactions do
@@ -24,5 +29,6 @@ Rails.application.routes.draw do
     resources :users
   end
 
+  mount PgHero::Engine, at: "pghero"
 
 end

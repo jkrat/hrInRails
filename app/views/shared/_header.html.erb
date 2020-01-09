@@ -25,14 +25,21 @@
     <div>
       <ul class="navbar-nav">
         <% if user_signed_in? %>
-          <li class="nav-item pr-2">
-            <% if current_user.employee %>
-            <%= link_to current_user.employee.first_name, users_dashboard_path, class: 'nav-link' %>
-            <% end %>
-          </li>
-          </li>
+          <% if current_user.employee %>
+            <li class="nav-item pr-2 text-light">
+              <%= link_to current_user.employee.first_name, users_path, method: :get, class: 'nav-link' %>
+            </li>
+            <li class="nav-item pr-2 pt-2 text-light">
+              <%= current_user.organization %>
+            </li>
+          <% end %>
+          <% if current_user != true_user %>
+            <li class="nav-item pr-2 text-light">
+              <%= button_to "Back to admin", stop_impersonating_users_path, method: :post, class: 'nav-link btn btn-link' %>
+            </li>
+          <% end %>
           <li class="nav-item">
-            <%= link_to 'Log out', destroy_user_session_path , :method => :delete, class: 'nav-link' %>
+            <%= link_to 'Log out', destroy_user_session_path, class: 'nav-link' %>
           </li>
         <% end %>
       </ul>

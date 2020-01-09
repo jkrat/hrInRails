@@ -29,6 +29,7 @@ class Employee < ApplicationRecord
   validates :permission_level, inclusion: permission_levels.keys
   validates :balance, numericality: { greater_than_or_equal_to: 0 }
 
+  scope :in_organization, ->(organization_id) { where(organization_id: organization_id) }
   scope :active, -> { where(status: Employee.statuses['Active']) }
   scope :managers, -> { where(permission_level: Employee.permission_levels['Manager']) }
   scope :by_name, -> { order(:last_name).order(:first_name) }
@@ -60,7 +61,7 @@ class Employee < ApplicationRecord
     return unless @user
 
     self.user_id = @user.id
-    @user.add_role 'View_Access', self
+    @user.add_role :View_Access, self
   end
 
 end

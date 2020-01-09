@@ -12,6 +12,18 @@ class User < ApplicationRecord
     email
   end
 
+  def allowed?(requested_permission)
+    if admin?
+      true
+    elsif group.full_access?
+      true
+    else
+      noun = requested_permission.split(':')[0]
+      full_access = "#{noun}:full_access"
+      group.permissions.include?(requested_permission) || group.permissions.include?(full_access)
+    end
+  end
+
   private
 
   def email_to_lowercase
@@ -24,7 +36,7 @@ class User < ApplicationRecord
   end
 
   def assign_organization
-    @organization = Organization.find(1)
+    @organization = Organization.find(@employee.organization_id)
     self.organization = @organization
   end
 
