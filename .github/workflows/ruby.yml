@@ -9,23 +9,16 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - uses: actions/cache@preview
-      id: cache
+    - name: GitHub Action for Slack
+      env:
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+      uses: Ilshidur/action-slack@1.6.2
+      with: 
+        args: 'A new workflow has happened'
+    - name: Notify slack
+      env:
+        SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      uses: pullreminders/slack-action@master
       with:
-        path: ~/local/rubies
-        key: ruby-2.6.5
-    - uses: clupprich/ruby-build-action@master
-      id: ruby
-      with:
-        ruby-version: 2.6.5
-        cache-available: ${{ steps.cache.outputs.cache-hit == 'true' }}
-    - name: Print version
-      run: ${{ steps.ruby.outputs.ruby-path }} --version
-    - name: Build and test with Rake
-      run: |
-        gem install bundler
-        bundle install --jobs 4 --retry 3
-        bundle exec rake
-        
-  
-    
+        args: '{\"channel\":\"CSGSHM3N2\",\"text\":\"Hello from the Github Action bot\"}'
+   
