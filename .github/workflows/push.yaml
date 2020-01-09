@@ -17,5 +17,5 @@ jobs:
         SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
       uses: pullreminders/slack-action@master
       with:
-        args: '{\"channel\":\"CSGSHM3N2\",\"text\":\"push to master branch by <author>\"}'
+        args: '{\"channel\":\"CSGSHM3N2\",\"text\":\"push to master branch by\"}'
    
