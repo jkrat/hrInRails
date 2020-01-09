@@ -17,6 +17,6 @@ jobs:
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
       uses: Ilshidur/action-slack@1.6.2
       with: 
-        args: ''
+        args: '[message]'
    
    
