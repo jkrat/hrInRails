@@ -1,4 +1,4 @@
-name: Ruby
+name: Pull Request Action
 
 on: 
   pull_request:
@@ -15,7 +15,6 @@ jobs:
     - name: GitHub Action for Slack
       env:
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-        SLACK_OVERRIDE_MESSAGE: '<author> submitted a pull request for <author>/<project> '
       uses: Ilshidur/action-slack@1.6.2
       with: 
         args: 'Pull request submitted. Action called: {{ GITHUB_ACTION }} as {{ EVENT_PAYLOAD.pull_request.id }}'
