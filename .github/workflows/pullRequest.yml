@@ -12,11 +12,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: GitHub Action for Slack
+    - name: Notify slack
       env:
-        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-      uses: Ilshidur/action-slack@1.6.2
-      with: 
-        args: '[message]'
+        SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      uses: pullreminders/slack-action@master
+      with:
+        args: '{\"channel\":\"CSGSHM3N2\",\"text\":\"merged pullrequest into master\"}'
    
    
