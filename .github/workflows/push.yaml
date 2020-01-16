@@ -3,7 +3,7 @@ name: Push Action
 on: 
   push:
     branches:
-      - master
+      - update-setup-and-testing
 
 jobs:
   build:
