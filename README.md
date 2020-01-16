@@ -36,9 +36,4 @@ rails db:seed
 rails s
 ```
 
-## Built With
-
-* [Rails](https://github.com/plataformatec/simple_form) 
-* [Simple Form](https://github.com/plataformatec/simple_form) 
-* [Bootstrap](https://getbootstrap.com/) 
 
